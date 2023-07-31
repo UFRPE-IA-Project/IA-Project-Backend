@@ -1,0 +1,31 @@
+Organização da Arquitetura e padrão do Projeto [backend]
+
+- Nomes de Projetos em inglês.
+
+- Nomes de classes, métodos e variáveis em português a menos quando já existe prática comum por nomenclatura em inglês (ex: Gets, Sets)
+
+- Objetos do tipo DataTransferObjects, ou DTOs, devem possuir o sufixo '-DTO' 
+no nome da classe e nos nomes das variáveis, quando estas forem tipadas com algum objeto que é de um DTO
+
+- Nomenclaturas de variáveis:
+    * camelCase (nomeVariavel, firstName, lastName)
+    * Evitar abrevições, a menos que sejam senso comum
+    * Evitar nomes genéricos para variáveis que possam comprometer o entendimento (var a)
+    * Preferir utilização de 'var' ou invés de variáveis explícitas 
+    * Um Campo (variável declarada diretamente dentro de uma classe ou estrutura) privado sempre terá o prefixo '_' (_nomeVariavel, _userService)
+    * Campos privados usuados para referenciar serviços ou repositórios sempre seram declarados como private e readonly (private readonly IBaseRepository _baseRepository)
+
+- Nomenclatura de métodos:
+    * Utilizar verbos e em PascalCase (ObterPrimeiroNome, CarregarDados, ConsultarSobrenome)
+    * Métodos com mas de 50 linhas precisam ser checados visando refatoração para redução do seu tamanho quando possível
+    * Dar preferência por apenas um return ao final quando possível
+
+- Nomenclatura de interfaces:
+    * Todas as Interfaces devem possuir o prefixo 'I-' para serem facilmente distinguidas (IUsuarioService, IUsuarioRepository)
+    * Todos os serviços e repositórios precisam possuir um contrato (interface)
+    * Serviços e repositórios são acessados via interfaces.
+
+- Nomenclatura de repositorios e serviços:
+    * Todos os repositórios e suas respectivas interfaces são extesões das suas classes bases (BaseRepository e IBaseRepository)
+    * Todos os repositórios e interfaces de repositórios devem possuir o sufixo '-Repository' (IUsuarioRepository, QuestaoRepository)
+    * Todos os serviços e interfaces de serviços devem possuir o sufixo '-Service' (IUsuarioService, QuestaoService)
