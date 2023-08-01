@@ -3,7 +3,7 @@
 API do projeto de IA educacional da disciplina Engenharia de Software ministrado pelo Prof. Dr. Leandro Marques. A API é escrita com base em C# e .NET 6.
 
 <h2> Proposta da aplicação </h2>
-<p> A aplicação tem a proposta de automatizar rotinas de aprendizagem desde a elaboaração do plano de ensino à realização de provas pela e simulados pela plataforma. </p> 
+<p> A aplicação tem a proposta de automatizar rotinas de aprendizagem desde a elaboração do plano de ensino à realização de provas pela e simulados pela plataforma. </p> 
 
 <h2> Tecnologias Utilizadas no projeto </h2>
 
@@ -23,7 +23,7 @@ API do projeto de IA educacional da disciplina Engenharia de Software ministrado
 
 <h4>Plano de ensino</h4>
 
-<p> O professor, além de cadastrar e acompanhar suas turmas, poderá elaborar o seu plano de ensino, interagindo com a inteligência artificial para montar, de forma automatizada, o seu plano de ensino. Para isto, o professor deverá informar as seguintes informações :   </p>
+<p> O professor, além de cadastrar e acompanhar suas turmas, poderá elaborar o seu plano de ensino, interagindo com a inteligência artificial para montar, de forma automatizada, o seu plano de ensino. Para isto, o professor deverá informar as seguintes informações:   </p>
 
 <li> Disciplina </li>
 <li> Escolaridade </li>
@@ -36,7 +36,7 @@ API do projeto de IA educacional da disciplina Engenharia de Software ministrado
 <p>O professor poderá editar ou criar manualmente os planos. </p>
 
  <h4>Banco de Questões</h4>
- <p> Ao realizar o cadastro da displina, o professor poderá gerar questões para esta disciplina, indicando o Nível das questões que deseja elaborar e o tipo de questão. </p>
+ <p> Ao realizar o cadastro da disciplina, o professor poderá gerar questões baseadas em seu plano de ensino, indicando o Nível das questões que deseja elaborar e o tipo de questão. </p>
  <p> A IA, irá elaborar as questões de acordo com o plano de ensino da disciplina </p>
  <p> O professor poderá editar e incluir questões manualmente. </p>
 
