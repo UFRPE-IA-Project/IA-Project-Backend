@@ -1,0 +1,86 @@
+-- Criação do Banco de Dados IAE_DB
+CREATE DATABASE IAE_DB;
+
+-- Utiliza o Banco de Dados IAE_DB
+USE IAE_DB;
+
+-- Tabela Usuario
+CREATE TABLE Usuario (
+    Id INT AUTO_INCREMENT PRIMARY KEY,
+    Nome VARCHAR(100) NOT NULL,
+    Sobrenome VARCHAR(100) NOT NULL,
+    Email VARCHAR(100) NOT NULL,
+    Telefone VARCHAR(20),
+    TipoUsuario ENUM('Aluno', 'Professor') NOT NULL
+);
+
+-- Tabela Aluno
+CREATE TABLE Aluno (
+    Id INT PRIMARY KEY,
+    FOREIGN KEY (Id) REFERENCES Usuario (Id)
+);
+
+-- Tabela Professor
+CREATE TABLE Professor (
+    Id INT PRIMARY KEY,
+    FOREIGN KEY (Id) REFERENCES Usuario (Id)
+);
+
+-- Tabela PlanoEnsino
+CREATE TABLE PlanoEnsino (
+    Id INT AUTO_INCREMENT PRIMARY KEY,
+    Nome VARCHAR(100),
+    NomeDisciplina VARCHAR(100) NOT NULL,
+    Escolaridade VARCHAR(100) NOT NULL,
+    CargaHoraria DOUBLE NOT NULL
+);
+
+-- Tabela Turma
+CREATE TABLE Turma (
+    Id INT AUTO_INCREMENT PRIMARY KEY,
+    CodigoTurma VARCHAR(10) NOT NULL,
+    ProfessorId INT NOT NULL,
+    PlanoEnsinoId INT NOT NULL,
+    FOREIGN KEY (ProfessorId) REFERENCES Professor (Id),
+    FOREIGN KEY (PlanoEnsinoId) REFERENCES PlanoEnsino (Id)
+);
+
+-- Tabela Avaliacao
+CREATE TABLE Avaliacao (
+    Id INT AUTO_INCREMENT PRIMARY KEY,
+    TipoAvaliacao ENUM('Prova', 'Outro') NOT NULL,
+    TurmaId INT NOT NULL,
+    ProfessorId INT NOT NULL,
+    FOREIGN KEY (TurmaId) REFERENCES Turma (Id),
+    FOREIGN KEY (ProfessorId) REFERENCES Professor (Id)
+);
+
+-- Tabela Questao
+CREATE TABLE Questao (
+    Id INT AUTO_INCREMENT PRIMARY KEY,
+    Enunciado TEXT NOT NULL,
+    AvaliacaoId INT NOT NULL,
+    FOREIGN KEY (AvaliacaoId) REFERENCES Avaliacao (Id)
+);
+
+-- Tabela Resposta
+CREATE TABLE Resposta (
+    Id INT AUTO_INCREMENT PRIMARY KEY,
+    EnunciadoResposta TEXT,
+    IsRespostaCorreta BOOLEAN NOT NULL,
+    QuestaoId INT NOT NULL,
+    FOREIGN KEY (QuestaoId) REFERENCES Questao (Id)
+);
+
+-- Tabela Nota
+CREATE TABLE Nota (
+    Id INT AUTO_INCREMENT PRIMARY KEY,
+    ValorNota DOUBLE NOT NULL,
+    ProvaId INT NOT NULL,
+    AlunoId INT NOT NULL,
+    TipoAvaliacao ENUM('Prova', 'Outro') NOT NULL,
+    TurmaId INT NOT NULL,
+    FOREIGN KEY (ProvaId) REFERENCES Avaliacao (Id),
+    FOREIGN KEY (AlunoId) REFERENCES Aluno (Id),
+    FOREIGN KEY (TurmaId) REFERENCES Turma (Id)
+);
