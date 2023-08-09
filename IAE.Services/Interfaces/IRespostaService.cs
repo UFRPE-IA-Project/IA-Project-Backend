@@ -1,4 +1,4 @@
-using IAE.Entidades.Entities; // Para acesso às entidades
+using IAE.Entidades.Entidades;
 
 namespace IAE.Services.Interfaces
 {

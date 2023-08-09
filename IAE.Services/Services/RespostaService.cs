@@ -1,5 +1,6 @@
-using IAE.Repositorio.Interfaces; // Para acesso ao repositório
-using IAE.Entidades.Entities;     // Para acesso às entidades
+using IAE.Services.Interfaces;
+using IAE.Repository.Interfaces;
+using IAE.Entidades.Entidades;
 
 namespace IAE.Services.Services
 {
@@ -16,7 +17,7 @@ namespace IAE.Services.Services
         // Obtém uma resposta pelo ID
         public Resposta GetResposta(int id)
         {
-            return _respostaRepository.GetById(id);
+            return _respostaRepository.FindById(id);
         }
 
         // Adiciona uma nova resposta
@@ -28,10 +29,10 @@ namespace IAE.Services.Services
         // Apaga uma resposta pelo ID
         public void ApagarResposta(int id)
         {
-            var resposta = _respostaRepository.GetById(id);
+            var resposta = _respostaRepository.FindById(id);
             if (resposta != null)
             {
-                _respostaRepository.Delete(resposta);
+                _respostaRepository.Delete(id);
             }
         }
     }
