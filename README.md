@@ -1,4 +1,5 @@
 <h1> IA-Project-Backend </h1> 
+API do projeto de IA educacional da disciplina Engenharia de Software ministrado pelo Prof. Dr. Leandro Marques. A API é escrita com base em C# e .NET 6.
 <br/>
 <h2>Participantes</h2>
 <p>André lima - Frontend/Infra</p> 
@@ -9,8 +10,6 @@
 <p>Vitor Anunciação - Backend</p> 
 <p>Gilmar Campelo - Database e apoio geral</p> 
 <br/>
-
-API do projeto de IA educacional da disciplina Engenharia de Software ministrado pelo Prof. Dr. Leandro Marques. A API é escrita com base em C# e .NET 6.
 
 <h2> Proposta da aplicação </h2>
 <p> A aplicação tem a proposta de automatizar rotinas de aprendizagem desde a elaboração do plano de ensino à realização de provas pela e simulados pela plataforma. </p> 
