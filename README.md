@@ -1,12 +1,12 @@
 <h1> IA-Project-Backend </h1> 
 
-André lima - Frontend/Infra
-Anderson Souza - Frontend
-Diego - 
-Samuel -
-Kleyton Clementino - Backend/Infra
-Vitor Anunciação - Backend
-Gilmar Campelo - Database e apoio geral
+<p>André lima - Frontend/Infra</p> 
+<p>Anderson Souza - Frontend</p> 
+<p>Diego - </p> 
+<p>Samuel -
+<p>Kleyton Clementino - Backend/Infra</p> 
+<p>Vitor Anunciação - Backend</p> 
+<p>Gilmar Campelo - Database e apoio geral</p> 
 
 API do projeto de IA educacional da disciplina Engenharia de Software ministrado pelo Prof. Dr. Leandro Marques. A API é escrita com base em C# e .NET 6.
 
