@@ -5,11 +5,12 @@
     "version": "1.0"
   },
   "paths": {
-    "/Questao/GetQuestao": {
+    "/Questao/ObterQuestao": {
       "get": {
         "tags": [
           "Questao"
         ],
+        "summary": "Obter uma uma questão",
         "operationId": "Questao",
         "parameters": [
           {
@@ -41,6 +42,9 @@
                 }
               }
             }
+          },
+          "400": {
+            "description": "Id fornecido inválido"
           }
         }
       }
@@ -50,6 +54,7 @@
         "tags": [
           "Questao"
         ],
+        "summary": "Adicionar uma questão",
         "requestBody": {
           "content": {
             "application/json": {
@@ -71,7 +76,27 @@
         },
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "Questão adicionada.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Questao"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Questao"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Questao"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Dado fornacido inválido"
           }
         }
       }
@@ -81,6 +106,7 @@
         "tags": [
           "Questao"
         ],
+        "summary": "Apaga uma questão apartir do id fornecido",
         "parameters": [
           {
             "name": "id",
@@ -93,7 +119,27 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "Questão {idQuestao} apagada com sucesso.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Questao"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Questao"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Questao"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Id fornecido inválido"
           }
         }
       }

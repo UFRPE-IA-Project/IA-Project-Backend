@@ -9,7 +9,7 @@ namespace IAE.Services.Interfaces
 {
 	public interface IQuestaoService
 	{
-		Questao GetQuestao(int id);
+		Questao ObterQuestao(int id);
 		void AdicionarQuestao(Questao questao);
 		void ApagarQuestao(int id);
 	}

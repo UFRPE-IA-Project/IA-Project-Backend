@@ -18,7 +18,7 @@ namespace IAE.Services.Services
 			_questaoRepository = questaoRepository;
 		}
 
-		public Questao GetQuestao(int id)
+		public Questao ObterQuestao(int id)
 		{
 			var questao = _questaoRepository.FindById(id);
 
