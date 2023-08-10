@@ -7,7 +7,7 @@ API do projeto de IA educacional da disciplina Engenharia de Software ministrado
 <p>Diego - </p> 
 <p>Samuel Alves -
 <p>Kleyton Clementino - Backend/Infra</p> 
-<p>Vitor Anunciação - Backend</p> 
+<p>Victor Anunciação - Backend</p> 
 <p>Gilmar Campelo - Database e apoio geral</p> 
 <br/>
 
