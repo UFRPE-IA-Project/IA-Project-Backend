@@ -1,0 +1,146 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "IAE.Web, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+    "version": "1.0"
+  },
+  "paths": {
+    "/Questao/GetQuestao": {
+      "get": {
+        "tags": [
+          "Questao"
+        ],
+        "operationId": "Questao",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Questao"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Questao"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Questao"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Questao/AdicionarQuestao": {
+      "post": {
+        "tags": [
+          "Questao"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Questao"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Questao"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Questao"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/Questao/ApagarQuestao": {
+      "post": {
+        "tags": [
+          "Questao"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Questao": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "enunciado": {
+            "type": "string",
+            "nullable": true
+          },
+          "respostas": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Resposta"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Resposta": {
+        "type": "object",
+        "properties": {
+          "enunciadoResposta": {
+            "type": "string",
+            "nullable": true
+          },
+          "isRespostaCorreta": {
+            "type": "boolean"
+          },
+          "idQuestao": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  }
+}
