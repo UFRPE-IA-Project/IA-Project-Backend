@@ -12,9 +12,7 @@ namespace IAE.Repositorio.Repositories
     {
         public List<Turma> BuscarTurmasPorUsuario(Usuario usuario)
         {
-            // Lógica para buscar turmas do usuário no banco de dados
-            // Exemplo:
-            // return _context.Turmas.Where(t => t.UsuarioId == usuario.Id).ToList();
+           
         }
     }
 }
