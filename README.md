@@ -4,8 +4,8 @@ API do projeto de IA educacional da disciplina Engenharia de Software ministrado
 <h2>Participantes</h2>
 <p>André lima - Frontend/Infra</p> 
 <p>Anderson Souza - Frontend</p> 
-<p>Diego - </p> 
-<p>Samuel Alves -
+<p>Samuel Alves - </p> 
+<p>Diego Passos- Backend</p> 
 <p>Kleyton Clementino - Backend/Infra</p> 
 <p>Victor Anunciação - Backend</p> 
 <p>Gilmar Campelo - Database e apoio geral</p> 
