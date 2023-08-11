@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace IAE.Repository.Interfaces
 {
-    public interface ITurmaRepository
+    public interface ITurmaRepository : IBaseRepository
     {
         List<Turma> BuscarTurmasPorUsuario(Usuario usuario);
     }
