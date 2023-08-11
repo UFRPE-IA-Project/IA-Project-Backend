@@ -1,3 +1,4 @@
+using IAE.Entities.Entities;
 using System.Collections.Generic;
 
 namespace IAE.Services.Interfaces

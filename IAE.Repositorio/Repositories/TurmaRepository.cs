@@ -1,18 +1,13 @@
-using IAE.Entidades.Entidades;
-using IAE.Repositorio.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using IAE.Entities.Entities;
+using IAE.Repository.Interfaces;
 
-namespace IAE.Repositorio.Repositories
+namespace IAE.Repository.Repositories
 {
     public class TurmaRepository : BaseRepository<Turma>, ITurmaRepository
     {
         public List<Turma> BuscarTurmasPorUsuario(Usuario usuario)
         {
-           
+           throw new NotImplementedException();
         }
     }
 }
