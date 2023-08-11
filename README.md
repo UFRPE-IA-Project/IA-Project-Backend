@@ -2,13 +2,13 @@
 API do projeto de IA educacional da disciplina Engenharia de Software ministrado pelo Prof. Dr. Leandro Marques. A API é escrita com base em C# e .NET 6.
 <br/>
 <h2>Participantes</h2>
-<p>André lima - Frontend/Infra</p> 
-<p>Anderson Souza - Frontend</p> 
-<p>Samuel Alves - </p> 
-<p>Diego Passos- Backend</p> 
-<p>Kleyton Clementino - Backend/Infra</p> 
-<p>Victor Anunciação - Backend</p> 
-<p>Gilmar Campelo - Database e apoio geral</p> 
+<p>Anderson Souza - Frontend<br>
+André lima - Frontend/Infra<br>
+Diego Passos- Backend<br>
+Gilmar Campelo - Database e apoio geral<br>
+Kleyton Clementino - Backend/Infra<br>
+Samuel Alves - Frontend<br>
+Victor Anunciação - Backend<br>
 <br/>
 
 <h2> Proposta da aplicação </h2>
