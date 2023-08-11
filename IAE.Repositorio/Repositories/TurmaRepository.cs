@@ -8,6 +8,11 @@ namespace IAE.Repository.Repositories
         public List<Turma> BuscarTurmasPorUsuario(Usuario usuario)
         {
            throw new NotImplementedException();
+            var turmas = _dbContext.Set<Turma>()
+                .Where(turma => turma.ProfessorId == usuario.Id )
+                .ToList();
+
+            return turmas;
         }
     }
 }
