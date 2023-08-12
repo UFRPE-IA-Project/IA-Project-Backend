@@ -1,0 +1,66 @@
+CREATE TABLE Usuario(
+Id INT AUTO INCREMENT PRIMARY KEY,
+Nome varchar (100) NOT NULL,
+Sobrenome varchar (100) NOT NULL,
+Email varchar (100) not null,
+Telefone varchar (20),
+tipoUsuario enum('Aluno', 'Professor') not null
+
+);
+CREATE TABLE Aluno(
+Id int primary key ,
+FOREIGN key (Id) REFERENCES Usuario (Id)
+);
+CREATE TABLE Professor (
+Id INT PRIMARY KEY,
+FOREIGN KEY (Id) REFERENCES Usuario (Id)
+);
+CREATE TABLE PlanoEnsino (
+Id INT AUTO INCREMENT PRIMARY KEY,
+Nome VARCHAR(100),
+NomeDisciplina VARCHAR(100) NOT NULL,
+Escolaridade VARCHAR(100) NOT NULL,
+CargaHoraria DOUBLE NOT NULL
+);
+CREATE TABLE Turma (
+Id INT AUTO_INCREMENT PRIMARY KEY,
+CodigoTurma VARCHAR(10) NOT NULL,
+ProfessorId INT NOT NULL,
+PlanoEnsinoId INT NOT NULL,
+FOREIGN KEY (ProfessorId) REFERENCES Professor (Id),
+FOREIGN KEY (PlanoEnsinoId) REFERENCES PlanoEnsino (Id)
+);
+
+CREATE TABLE Avaliacao (
+    Id INTEGER PRIMARY KEY AUTOINCREMENT,
+    TipoAvaliacao TEXT NOT NULL CHECK (TipoAvaliacao IN ('Prova', 'Outro')),
+    TurmaId INTEGER NOT NULL,
+    ProfessorId INTEGER NOT NULL,
+    FOREIGN KEY (TurmaId) REFERENCES Turma (Id),
+    FOREIGN KEY (ProfessorId) REFERENCES Professor (Id)
+);
+CREATE TABLE Questao (
+Id INTEGER AUTOINCREMENT PRIMARY KEY,
+Enunciado TEXT NOT NULL,
+AvaliacaoId INT NOT NULL,
+FOREIGN KEY (AvaliacaoId) REFERENCES Avaliacao (Id)
+);
+
+CREATE TABLE Resposta (
+Id INTEGER AUTOINCREMENT PRIMARY KEY,
+EnunciadoResposta TEXT,
+IsRespostaCorreta BOOLEAN NOT NULL,
+QuestaoId INT NOT NULL,
+FOREIGN KEY (QuestaoId) REFERENCES Questao (Id)
+);
+CREATE TABLE Nota (
+Id INTEGER AUTOINCREMENT PRIMARY KEY,
+ValorNota DOUBLE NOT NULL,
+ProvaId INTEGER NOT NULL,
+AlunoId INTEGER NOT NULL,
+TipoAvaliacao ENUM('Prova', 'Outro') NOT NULL,
+TurmaId INTEGER NOT NULL,
+FOREIGN KEY (ProvaId) REFERENCES Avaliacao (Id),
+FOREIGN KEY (AlunoId) REFERENCES Aluno (Id),
+FOREIGN KEY (TurmaId) REFERENCES Turma (Id)
+);
