@@ -18,24 +18,22 @@ namespace IAE.Services.Services
         {
             _avaliacaoRepository = avaliacaoRepository;
         }
-        public Avaliacao GerarSimulado(Turma turma, Professor professor)
+        public Avaliacao GerarSimulado(int turmaId)
         {
             
             Avaliacao avaliacao = new Avaliacao();
             avaliacao.TipoAvaliacao = TipoAvaliacao.simulado;
-            avaliacao.Turma = turma;
-            avaliacao.Professor = professor;
+            
             
             
             return avaliacao;
         }
-        public Avaliacao GerarProva(Turma turma, Professor professor)
+        public Avaliacao GerarProva(int turmaId)
         {
 
             Avaliacao avaliacao = new Avaliacao();
             avaliacao.TipoAvaliacao = TipoAvaliacao.prova;
-            avaliacao.Turma = turma;
-            avaliacao.Professor = professor;
+           
 
 
             return avaliacao;

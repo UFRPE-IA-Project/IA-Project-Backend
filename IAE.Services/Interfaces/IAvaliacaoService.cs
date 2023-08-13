@@ -5,8 +5,8 @@ namespace IAE.Services.Interfaces
 {
     public interface IAvaliacaoService
     {
-      public Avaliacao GerarSimulado(Turma turma, Professor professor);
-      public Avaliacao GerarProva(Turma turma, Professor professor);
+      public Avaliacao GerarSimulado(int turmaId);
+      public Avaliacao GerarProva(int turmaId);
 
     }
 

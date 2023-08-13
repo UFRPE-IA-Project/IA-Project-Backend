@@ -21,28 +21,27 @@ namespace IAE.Web.Controllers
         }
 
 
-        // GET: Avaliacao/GetSimulado
+        // POST: Avaliacao/PostSimulado
         [HttpGet(Name = "Simulado")]
         [SwaggerOperation(Summary = "Obter um Simulado")]
         [SwaggerResponse(200)]
         [SwaggerResponse(400)]
-        public Avaliacao GerarSimulado(Turma turma, Professor professor)
+        public Avaliacao GerarSimulado(int turmaId)
             
         {
-            var avaliacao = _avaliacaoService.GerarSimulado(turma,professor);
+            var avaliacao = _avaliacaoService.GerarSimulado(turmaId);
 
             return avaliacao;
         }
         
-        // GET: Avaliacao/GetProva
+        // POST: Avaliacao/PostProva
         [HttpGet(Name = "Prova")]
         [SwaggerOperation(Summary = "Obter uma Prova")]
         [SwaggerResponse(200)]
         [SwaggerResponse(400)]
-        public Avaliacao GerarProva(Turma turma, Professor professor)
-
+        public Avaliacao GerarProva(int turmaId)
         {
-            var avaliacao = _avaliacaoService.GerarProva(turma, professor);
+            var avaliacao = _avaliacaoService.GerarProva(turmaId);
 
             return avaliacao;
         }
