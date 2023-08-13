@@ -8,7 +8,7 @@ namespace IAE.Entities.Enumarations
 {
 	public enum TipoAvaliacao
 	{
-		simulado = 1,
-		prova
+		Simulado = 1,
+		Prova
 	}
 }

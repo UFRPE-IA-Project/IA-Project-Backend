@@ -18,6 +18,12 @@
     <ProjectReference Include="..\IAE.Repositorio\IAE.Repository.csproj" />
     <ProjectReference Include="..\IAE.Services\IAE.Services.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <None Update="IAEDataBase.db">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 	
     <Target Name="PostBuild" AfterTargets="PostBuildEvent">
 	    <Exec Command="dotnet tool restore" />
