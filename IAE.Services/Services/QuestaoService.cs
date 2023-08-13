@@ -29,7 +29,7 @@ namespace IAE.Services.Services
 		{
 			var idQuestao = _questaoRepository.Add(questao);
 
-			if (idQuestao != -1)
+			if (idQuestao = -1)
 			{
 				throw new Exception("Não foi possível adicionar a questão");
 			}
@@ -39,7 +39,7 @@ namespace IAE.Services.Services
 		{
 			var qtdDeletada = _questaoRepository.Delete(id);
 
-			if (qtdDeletada != -1)
+			if (qtdDeletada = -1)
 			{
 				throw new Exception("Não foi possível apagar a questão");
 			}
