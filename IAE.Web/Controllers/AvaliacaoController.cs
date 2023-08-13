@@ -22,7 +22,7 @@ namespace IAE.Web.Controllers
 
 
         // POST: Avaliacao/PostSimulado
-        [HttpGet(Name = "Simulado")]
+        [HttpPost]
         [SwaggerOperation(Summary = "Obter um Simulado")]
         [SwaggerResponse(200)]
         [SwaggerResponse(400)]
@@ -35,7 +35,7 @@ namespace IAE.Web.Controllers
         }
         
         // POST: Avaliacao/PostProva
-        [HttpGet(Name = "Prova")]
+        [HttpPost]
         [SwaggerOperation(Summary = "Obter uma Prova")]
         [SwaggerResponse(200)]
         [SwaggerResponse(400)]
