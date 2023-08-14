@@ -1,4 +1,4 @@
-<h1>Projeto IA na Educação</h1>
+<h1>Projeto IA na Educação -- Macroarquitetura</h1>
 <p>
   Nosso projeto é dividido em camadas e no padrão MVC-Web, de forma genérica: 
   <li> Frontend - Usando Javascript e React </li>
