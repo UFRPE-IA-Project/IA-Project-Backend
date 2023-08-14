@@ -19,7 +19,7 @@ Victor Anunciação - Backend<br>
   <span> <img src ='https://icon-library.com/images/react-icon/react-icon-29.jpg' style='width:20px' >  React   </span> <br>
  <span> <img src ='https://static.vecteezy.com/system/resources/previews/021/495/993/original/chatgpt-openai-logo-icon-free-png.png' style='width:20px' >  OpenAi   </span> <br>
   <span> <img src ='https://static-00.iconduck.com/assets.00/c-sharp-c-icon-1822x2048-wuf3ijab.png' style='width:20px' >  C#   </span> <br>
-  <span> <img src ='https://cdn.icon-icons.com/icons2/3053/PNG/512/mysql_workbench_macos_bigsur_icon_189924.png' style='width:20px' >  Mysql   </span> 
+  <span> <img src ='https://cdn.icon-icons.com/icons2/2107/PNG/512/file_type_sqlite_icon_130153.png' style='width:20px' >  SQLite   </span> 
 
 <h2>Funcionalidades do sistema</h2>
 
