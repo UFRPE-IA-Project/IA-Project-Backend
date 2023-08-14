@@ -71,35 +71,14 @@ namespace IAE.Repository.Repositories
 		}
 
 		public abstract T Insert(T item);
-		//EXEMPLO DE COMO IMPLEMENTAR
-
-		//using (IDbConnection connection = new SQLiteConnection(_connectionString))
-		//{
-		//	connection.Open();
-		//	return connection.Execute("INSERT INTO " + typeof(T).Name + " VALUES (@Id, @Name, @Age)", item);
-		//}
+		//EXEMPLO DE COMO IMPLEMENTAR: ver UsuarioService
 
 		public abstract int Insert(IList<T> items);
-		//EXEMPLO DE COMO IMPLEMENTAR
-
-		//using (IDbConnection connection = new SQLiteConnection(_connectionString))
-		//{
-		//	connection.Open();
-		//	return connection.Query<int>("INSERT INTO " + typeof(T).Name + " VALUES (@Id, @Name, @Age)", items).ToList();
-		//}
+		//EXEMPLO DE COMO IMPLEMENTAR: ver UsuarioService
 
 
 		public abstract T Update(T item);
-		//EXEMPLO DE COMO IMPLEMENTAR
-
-		//using (IDbConnection connection = new SQLiteConnection(_connectionString))
-		//{
-		//	connection.Open();
-		//	connection.Execute("UPDATE " + typeof(T).Name + " SET Name = @Name, Age = @Age WHERE Id = @Id", item);
-		//	return item;
-		//}
-
-
+		//EXEMPLO DE COMO IMPLEMENTAR: ver UsuarioService
 
 		protected string LoadConnectionString()
 		{
