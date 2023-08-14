@@ -10,12 +10,10 @@ namespace IAE.Entities.Entities
 {
 	public class Avaliacao : BaseEntity
 	{
-        public Avaliacao()
-        {
-            Questoes = new List<Questao>();
-        }
-
         public TipoAvaliacao TipoAvaliacao { get; set; }
+        public int IdTurma { get; set; }
+        public int IdProfessor { get; set; }
+        public List<int> IdsQuestoes { get; set; }
         public Turma Turma { get; set; }
         public Usuario Professor { get; set; }
         public List<Questao> Questoes { get; set; }

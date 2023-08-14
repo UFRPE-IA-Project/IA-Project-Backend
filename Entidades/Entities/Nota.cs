@@ -9,10 +9,14 @@ namespace IAE.Entities.Entities
 {
 	public class Nota : BaseEntity
 	{
-        public Avaliacao Prova { get; set; }
+        public int IdProva { get; set; }
         public double ValorNota { get; set; }
-        public Usuario Aluno { get; set; }
+        public int IdAluno { get; set; }
         public TipoAvaliacao TipoAvaliacao { get; set; }
+        public int IdProfessor { get; set; }
+        public int IdTurma { get; set; }
+        public Avaliacao Prova { get; set; }
+        public Usuario Aluno { get; set; }
         public Turma Turma { get; set; }
 
     }

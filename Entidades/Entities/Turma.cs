@@ -11,7 +11,9 @@ namespace IAE.Entities.Entities
 		private static readonly Random _random = new Random();
 
 		public string CodigoTurma { get; set; } = GerarCodigoTurma();
-		public Usuario Professor { get; set; }
+        public int IdProfessor { get; set; }
+        public int IdPlanoEnsino { get; set; }
+        public Usuario Professor { get; set; }
         public List<Usuario> Alunos { get; set; } = new List<Usuario>();
         public PlanoEnsino PlanoEnsino { get; set; }
 
