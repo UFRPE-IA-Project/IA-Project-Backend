@@ -1,52 +1,116 @@
-﻿using IAE.Repository.Interfaces;
+﻿using Dapper;
+using IAE.Repository.Interfaces;
+using Microsoft.Extensions.Configuration;
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SQLite;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace IAE.Repository.Repositories
 {
-	public class BaseRepository<T> : IBaseRepository<T> where T : class
+	public abstract class BaseRepository<T> : IBaseRepository<T> where T : class
 	{
-		public int Add(T item)
-		{
-			return -1;
-		}
+		protected readonly IConfiguration _config;
+		protected readonly string _connectionString;
+		protected readonly string _connectionName = "DEV";
 
-		public IList<int> AddList(IEnumerable<T> itens)
-		{
-			throw new NotImplementedException();
-		}
 
-		public int Delete(int id)
+		public BaseRepository(IConfiguration config)
 		{
-			return -1;
-		}
-
-		public int DeleteItens(IEnumerable<int> ids)
-		{
-			throw new NotImplementedException();
+			_config = config;
+			_connectionString = LoadConnectionString();
 		}
 
 		public IList<T> FindAll()
 		{
-			throw new NotImplementedException();
+			using (IDbConnection connection = new SQLiteConnection(_connectionString))
+			{
+				connection.Open();
+				return connection.Query<T>("SELECT * FROM " + typeof(T).Name, new DynamicParameters()).ToList();
+			}
 		}
 
 		public T FindById(int key)
 		{
-			throw new NotImplementedException();
+			using (IDbConnection connection = new SQLiteConnection(_connectionString))
+			{
+				connection.Open();
+				return connection.QueryFirstOrDefault<T>("SELECT * FROM " + typeof(T).Name + " WHERE Id = @Id", new { Id = key });
+			}
 		}
 
-		public IList<T> FindByIds(int[] keys)
+		public IList<T> FindByIds(IEnumerable<int> keys)
 		{
-			throw new NotImplementedException();
+			using (IDbConnection connection = new SQLiteConnection(_connectionString))
+			{
+				connection.Open();
+				return connection.Query<T>("SELECT * FROM " + typeof(T).Name + " WHERE Id IN @Ids", new { Ids = keys }).ToList();
+			}
 		}
 
-		public T Update(T item)
+		public int Delete(int id)
 		{
-			throw new NotImplementedException();
+			using (IDbConnection connection = new SQLiteConnection(_connectionString))
+			{
+				connection.Open();
+				return connection.Execute("DELETE FROM " + typeof(T).Name + " WHERE Id = @Id", new { Id = id });
+			}
+		}
+
+		public int DeleteItens(IEnumerable<int> ids)
+		{
+			using (IDbConnection connection = new SQLiteConnection(_connectionString))
+			{
+				connection.Open();
+				return connection.Execute("DELETE FROM " + typeof(T).Name + " WHERE Id IN @Ids", new { Ids = ids });
+			}
+		}
+
+		public abstract T Insert(T item);
+		//EXEMPLO DE COMO IMPLEMENTAR
+
+		//using (IDbConnection connection = new SQLiteConnection(_connectionString))
+		//{
+		//	connection.Open();
+		//	return connection.Execute("INSERT INTO " + typeof(T).Name + " VALUES (@Id, @Name, @Age)", item);
+		//}
+
+		public abstract int Insert(IList<T> items);
+		//EXEMPLO DE COMO IMPLEMENTAR
+
+		//using (IDbConnection connection = new SQLiteConnection(_connectionString))
+		//{
+		//	connection.Open();
+		//	return connection.Query<int>("INSERT INTO " + typeof(T).Name + " VALUES (@Id, @Name, @Age)", items).ToList();
+		//}
+
+
+		public abstract T Update(T item);
+		//EXEMPLO DE COMO IMPLEMENTAR
+
+		//using (IDbConnection connection = new SQLiteConnection(_connectionString))
+		//{
+		//	connection.Open();
+		//	connection.Execute("UPDATE " + typeof(T).Name + " SET Name = @Name, Age = @Age WHERE Id = @Id", item);
+		//	return item;
+		//}
+
+
+
+		protected string LoadConnectionString()
+		{
+			var connectionString = _config.GetConnectionString(_connectionName);
+
+			if (string.IsNullOrEmpty(connectionString))
+			{
+				throw new Exception("Não foi possível encontrar a connection string apropriada.");
+			}
+
+			return connectionString;
 		}
 	}
 }

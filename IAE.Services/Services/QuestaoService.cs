@@ -27,9 +27,9 @@ namespace IAE.Services.Services
 
 		public void AdicionarQuestao(Questao questao)
 		{
-			var idQuestao = _questaoRepository.Add(questao);
+			var questaoDb = _questaoRepository.Insert(questao);
 
-			if (idQuestao != -1)
+			if (questaoDb is null)
 			{
 				throw new Exception("Não foi possível adicionar a questão");
 			}

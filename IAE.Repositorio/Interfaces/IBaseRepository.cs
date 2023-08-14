@@ -10,14 +10,14 @@ namespace IAE.Repository.Interfaces
 	{
 		IList<T> FindAll();
 		T FindById(int key);
-		IList<T> FindByIds(int[] keys);
-
-		int Add(T item);
-		IList<int> AddList(IEnumerable<T> itens);
-
-		T Update(T item);
+		IList<T> FindByIds(IEnumerable<int> keys);
 
 		int Delete (int id);
 		int DeleteItens(IEnumerable<int> ids);
+
+
+		T Insert(T item);
+		int Insert(IList<T> itens);
+		T Update(T item);
 	}
 }
