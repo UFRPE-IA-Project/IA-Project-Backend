@@ -10,19 +10,13 @@ namespace IAE.Entities.Entities
 	{
 		private static readonly Random _random = new Random();
 
-		public Turma(Professor professor)
-		{
-			CodigoTurma = GerarCodigoTurma();
-			Professor = professor ?? throw new ArgumentNullException(nameof(professor));
-		}
-
-		public string CodigoTurma { get; set; }
-        public Professor Professor { get; set; }
-        public List<Aluno> Alunos { get; set; } = new List<Aluno>();
+		public string CodigoTurma { get; set; } = GerarCodigoTurma();
+		public Usuario Professor { get; set; }
+        public List<Usuario> Alunos { get; set; } = new List<Usuario>();
         public PlanoEnsino PlanoEnsino { get; set; }
 
 
-        private string GerarCodigoTurma()
+        private static string GerarCodigoTurma()
 		{
 			var letrasNumeros = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 			var codigo = new StringBuilder();

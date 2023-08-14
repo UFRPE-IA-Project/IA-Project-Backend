@@ -17,8 +17,8 @@ namespace IAE.Entities.Entities
 
         public TipoAvaliacao TipoAvaliacao { get; set; }
         public Turma Turma { get; set; }
-        public Professor Professor { get; set; }
+        public Usuario Professor { get; set; }
         public List<Questao> Questoes { get; set; }
-        public List<Aluno> AlunosParticipantes { get; set; }
+        public List<Usuario> AlunosParticipantes { get; set; }
     }
 }

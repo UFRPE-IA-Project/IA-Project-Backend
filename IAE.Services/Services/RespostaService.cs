@@ -20,7 +20,7 @@ namespace IAE.Services.Services
 
         public void AdicionarResposta(Resposta resposta)
         {
-            _respostaRepository.Add(resposta);
+            _respostaRepository.Insert(resposta);
         }
 
         public void ApagarResposta(int id)

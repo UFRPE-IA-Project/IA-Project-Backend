@@ -13,8 +13,9 @@ namespace IAE.Web.Utils
 			builder.Services.AddScoped<IRespostaService, RespostaService>();
             builder.Services.AddScoped<ITurmaService, TurmaService>();
             builder.Services.AddScoped<IAvaliacaoService, AvaliacaoService>();
+            builder.Services.AddScoped<IUsuarioService, UsuarioService>();
 
-            return builder;
+			return builder;
 		}
 
 		public static WebApplicationBuilder RegisterRepositories(this WebApplicationBuilder builder)
@@ -23,8 +24,9 @@ namespace IAE.Web.Utils
 			builder.Services.AddScoped<IRespostaRepository, RespostaRepository>();
             builder.Services.AddScoped<ITurmaRepository, TurmaRepository> ();
             builder.Services.AddScoped<IAvaliacaoRepository, AvaliacaoRepository>();
+            builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
 
-            return builder;
+			return builder;
 		}
 	}
 }

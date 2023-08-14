@@ -22,7 +22,7 @@ namespace IAE.Services.Services
         {
             
             Avaliacao avaliacao = new Avaliacao();
-            avaliacao.TipoAvaliacao = TipoAvaliacao.simulado;
+            avaliacao.TipoAvaliacao = TipoAvaliacao.Simulado;
             
             
             
@@ -32,7 +32,7 @@ namespace IAE.Services.Services
         {
 
             Avaliacao avaliacao = new Avaliacao();
-            avaliacao.TipoAvaliacao = TipoAvaliacao.prova;
+            avaliacao.TipoAvaliacao = TipoAvaliacao.Prova;
            
 
 
