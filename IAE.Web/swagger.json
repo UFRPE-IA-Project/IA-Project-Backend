@@ -5,6 +5,94 @@
     "version": "1.0"
   },
   "paths": {
+    "/Avaliacao/GerarSimulado": {
+      "get": {
+        "tags": [
+          "Avaliacao"
+        ],
+        "summary": "Obter um Simulado",
+        "operationId": "Simulado",
+        "parameters": [
+          {
+            "name": "turmaId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Avaliacao"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Avaliacao"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Avaliacao"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/Avaliacao/GerarProva": {
+      "get": {
+        "tags": [
+          "Avaliacao"
+        ],
+        "summary": "Obter uma Prova",
+        "operationId": "Prova",
+        "parameters": [
+          {
+            "name": "turmaId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Avaliacao"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Avaliacao"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Avaliacao"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
     "/Questao/ObterQuestao": {
       "get": {
         "tags": [
@@ -147,6 +235,205 @@
   },
   "components": {
     "schemas": {
+      "Aluno": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "nome": {
+            "type": "string",
+            "nullable": true
+          },
+          "sobrenome": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "nullable": true
+          },
+          "telefone": {
+            "type": "string",
+            "nullable": true
+          },
+          "tipoUsuario": {
+            "$ref": "#/components/schemas/TipoUsuario"
+          },
+          "turmas": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Turma"
+            },
+            "nullable": true
+          },
+          "notas": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Nota"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Avaliacao": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "tipoAvaliacao": {
+            "$ref": "#/components/schemas/TipoAvaliacao"
+          },
+          "turma": {
+            "$ref": "#/components/schemas/Turma"
+          },
+          "professor": {
+            "$ref": "#/components/schemas/Professor"
+          },
+          "questoes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Questao"
+            },
+            "nullable": true
+          },
+          "alunosParticipantes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Aluno"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Nota": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "prova": {
+            "$ref": "#/components/schemas/Avaliacao"
+          },
+          "valorNota": {
+            "type": "number",
+            "format": "double"
+          },
+          "aluno": {
+            "$ref": "#/components/schemas/Aluno"
+          },
+          "tipoAvaliacao": {
+            "$ref": "#/components/schemas/TipoAvaliacao"
+          },
+          "turma": {
+            "$ref": "#/components/schemas/Turma"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PlanoEnsino": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "nome": {
+            "type": "string",
+            "nullable": true
+          },
+          "nomeDisciplina": {
+            "type": "string",
+            "nullable": true
+          },
+          "escolaridade": {
+            "type": "string",
+            "nullable": true
+          },
+          "cargaHoraria": {
+            "type": "number",
+            "format": "double"
+          },
+          "referenciasBibliograficas": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ReferenciaBibliografica"
+            },
+            "nullable": true
+          },
+          "topicosAbordados": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Professor": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "nome": {
+            "type": "string",
+            "nullable": true
+          },
+          "sobrenome": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "nullable": true
+          },
+          "telefone": {
+            "type": "string",
+            "nullable": true
+          },
+          "tipoUsuario": {
+            "$ref": "#/components/schemas/TipoUsuario"
+          },
+          "turmas": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Turma"
+            },
+            "nullable": true
+          },
+          "planosEnsino": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PlanoEnsino"
+            },
+            "nullable": true
+          },
+          "alunos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Aluno"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "Questao": {
         "type": "object",
         "properties": {
@@ -169,6 +456,28 @@
         },
         "additionalProperties": false
       },
+      "ReferenciaBibliografica": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "referencia": {
+            "type": "string",
+            "nullable": true
+          },
+          "planosEnsino": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PlanoEnsino"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "Resposta": {
         "type": "object",
         "properties": {
@@ -183,6 +492,50 @@
             "type": "integer",
             "format": "int32",
             "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "TipoAvaliacao": {
+        "enum": [
+          1,
+          2
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "TipoUsuario": {
+        "enum": [
+          1,
+          2
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "Turma": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "codigoTurma": {
+            "type": "string",
+            "nullable": true
+          },
+          "professor": {
+            "$ref": "#/components/schemas/Professor"
+          },
+          "alunos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Aluno"
+            },
+            "nullable": true
+          },
+          "planoEnsino": {
+            "$ref": "#/components/schemas/PlanoEnsino"
           }
         },
         "additionalProperties": false
