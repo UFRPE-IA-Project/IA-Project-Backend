@@ -1,6 +1,6 @@
 ﻿using IAE.Entidades.Entidades;
-using IAE.Entities.Entities;
-using IAE.Repository.Interfaces;
+using IAE.Entidades.Entities;
+using IAE.Repositorio.Interfaces;
 using IAE.Services.Services;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IAE.Repository.Repositories
+namespace IAE.Repositorio.Repositories
 {
     public class AvaliacaoRepository : BaseRepository<Avaliacao>, IAvaliacaoRepository
     {

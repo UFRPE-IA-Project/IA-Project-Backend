@@ -1,6 +1,6 @@
 ﻿using IAE.Entidades.Entidades;
-using IAE.Entities.Entities;
-using IAE.Repository.Interfaces;
+using IAE.Entidades.Entities;
+using IAE.Repositorio.Interfaces;
 
 namespace IAE.Services.Services
 {

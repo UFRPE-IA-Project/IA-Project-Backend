@@ -5,9 +5,9 @@ VisualStudioVersion = 17.6.33801.468
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IAE.Web", "IAE.Web.csproj", "{9B454730-626C-47EA-9423-77686F9CE564}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IAE.Entities", "..\Entidades\IAE.Entities.csproj", "{E0931285-3E65-4285-9FED-B6267B675F06}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IAE.Entidades", "..\Entidades\IAE.Entities.csproj", "{E0931285-3E65-4285-9FED-B6267B675F06}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IAE.Repository", "..\IAE.Repositorio\IAE.Repository.csproj", "{F1878CE2-159B-4659-B472-3597706AE36E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IAE.Repositorio", "..\IAE.Repositorio\iae.repositorio.csproj", "{F1878CE2-159B-4659-B472-3597706AE36E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IAE.Services", "..\IAE.Services\IAE.Services.csproj", "{DB7DFAEB-942B-40E1-9F5D-30C4CD92CB30}"
 EndProject

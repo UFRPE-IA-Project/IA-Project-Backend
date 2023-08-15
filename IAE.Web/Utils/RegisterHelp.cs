@@ -1,5 +1,5 @@
-﻿using IAE.Repository.Interfaces;
-using IAE.Repository.Repositories;
+﻿using IAE.Repositorio.Interfaces;
+using IAE.Repositorio.Repositories;
 using IAE.Services.Interfaces;
 using IAE.Services.Services;
 

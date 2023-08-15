@@ -1,5 +1,5 @@
-﻿using IAE.Entities.Entities;
-using IAE.Entities.Enumarations;
+﻿using IAE.Entidades.Entities;
+using IAE.Entidades.Enumarations;
 
 namespace IAE.Services.Interfaces
 {

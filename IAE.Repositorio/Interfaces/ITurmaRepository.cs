@@ -1,11 +1,11 @@
-using IAE.Entities.Entities;
+using IAE.Entidades.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IAE.Repository.Interfaces
+namespace IAE.Repositorio.Interfaces
 {
     public interface ITurmaRepository : IBaseRepository<Turma>
     {

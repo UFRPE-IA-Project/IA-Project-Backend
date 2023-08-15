@@ -1,6 +1,6 @@
 using System.Collections.Generic;
-using IAE.Entities.Entities;
-using IAE.Repository.Interfaces;
+using IAE.Entidades.Entities;
+using IAE.Repositorio.Interfaces;
 using IAE.Services.Interfaces;
 
 namespace IAE.Services.Services
@@ -16,7 +16,32 @@ namespace IAE.Services.Services
 
 		public List<Turma> BuscarTurmasPorUsuario(Usuario usuario)
 		{
-			throw new NotImplementedException();
-		}
+            return _turmaRepository.BuscarTurmasPorUsuario(usuario);
+        }
+
+        public Turma Insert(Turma turma)
+        {
+            return _turmaRepository.Insert(turma);
+        }
+
+        public int Insert(IList<Turma> turmas)
+        {
+            return _turmaRepository.Insert(turmas);
+        }
+
+        public Turma Update(Turma turma)
+        {
+            return _turmaRepository.Update(turma);
+        }
+
+        public Turma GetById(int id)
+        {
+            return _turmaRepository.GetById(id);
+        }
+
+        public void Delete(int id)
+        {
+            _turmaRepository.Delete(id);
+        }
 	}
 }

@@ -1,4 +1,4 @@
-using IAE.Entities.Entities;
+using IAE.Entidades.Entities;
 using System.Collections.Generic;
 
 namespace IAE.Services.Interfaces

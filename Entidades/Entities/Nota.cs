@@ -1,11 +1,11 @@
-﻿using IAE.Entities.Enumarations;
+﻿using IAE.Entidades.Enumarations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IAE.Entities.Entities
+namespace IAE.Entidades.Entities
 {
 	public class Nota : BaseEntity
 	{

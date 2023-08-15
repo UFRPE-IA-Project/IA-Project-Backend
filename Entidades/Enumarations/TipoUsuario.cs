@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IAE.Entities.Enumarations
+namespace IAE.Entidades.Enumarations
 {
 	public enum TipoUsuario
 	{

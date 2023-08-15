@@ -1,5 +1,5 @@
 ﻿using Dapper;
-using IAE.Repository.Interfaces;
+using IAE.Repositorio.Interfaces;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections;
@@ -10,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IAE.Repository.Repositories
+namespace IAE.Repositorio.Repositories
 {
 	public abstract class BaseRepository<T> : IBaseRepository<T> where T : class
 	{

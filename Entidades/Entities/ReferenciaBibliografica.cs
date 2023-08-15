@@ -1,4 +1,4 @@
-﻿namespace IAE.Entities.Entities
+﻿namespace IAE.Entidades.Entities
 {
 	public class ReferenciaBibliografica : BaseEntity
 	{

@@ -1,5 +1,5 @@
 ﻿using IAE.Entidades.Entidades;
-using IAE.Entities.Entities;
+using IAE.Entidades.Entities;
 using IAE.Services.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.JsonPatch.Operations;

@@ -1,6 +1,6 @@
 ﻿using Dapper;
-using IAE.Entities.Entities;
-using IAE.Repository.Interfaces;
+using IAE.Entidades.Entities;
+using IAE.Repositorio.Interfaces;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
@@ -10,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IAE.Repository.Repositories
+namespace IAE.Repositorio.Repositories
 {
 	public class UsuarioRepository : BaseRepository<Usuario>, IUsuarioRepository
 	{

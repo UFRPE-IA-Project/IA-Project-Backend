@@ -1,5 +1,5 @@
 ﻿using IAE.Entidades.Entidades;
-using IAE.Repository.Interfaces;
+using IAE.Repositorio.Interfaces;
 using IAE.Services.Interfaces;
 using System;
 using System.Collections.Generic;

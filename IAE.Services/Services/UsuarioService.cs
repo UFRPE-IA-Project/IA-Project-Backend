@@ -1,8 +1,8 @@
 ﻿using IAE.Entidades.Entidades;
-using IAE.Entities.DTO;
-using IAE.Entities.Entities;
-using IAE.Entities.Enumarations;
-using IAE.Repository.Interfaces;
+using IAE.Entidades.DTO;
+using IAE.Entidades.Entities;
+using IAE.Entidades.Enumarations;
+using IAE.Repositorio.Interfaces;
 using IAE.Services.Interfaces;
 using System;
 using System.Collections.Generic;

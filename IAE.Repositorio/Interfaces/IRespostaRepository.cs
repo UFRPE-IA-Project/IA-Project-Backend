@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IAE.Repository.Interfaces
+namespace IAE.Repositorio.Interfaces
 {
 	public interface IRespostaRepository : IBaseRepository<Resposta>
 	{

@@ -1,4 +1,4 @@
-﻿using IAE.Entities.Entities;
+﻿using IAE.Entidades.Entities;
 
 namespace IAE.Entidades.Entidades
 {
