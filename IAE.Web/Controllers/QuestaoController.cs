@@ -19,16 +19,14 @@ namespace IAE.Web.Controllers
 			_questaoService = questaoService;
 		}
 
-
 		// GET: Questao/GetQuestao/[id]
 		[HttpGet(Name = "Questao")]
-		[SwaggerOperation(Summary = "Obter uma uma questão")]
+		[SwaggerOperation(Summary = "Obter uma questão")]
 		[SwaggerResponse(200)]
 		[SwaggerResponse(400, "Id fornecido inválido")]
 		public Questao ObterQuestao(int id)
 		{
 			var questao = _questaoService.ObterQuestao(id);
-
 			return questao;
 		}
 
@@ -40,7 +38,6 @@ namespace IAE.Web.Controllers
 		public ActionResult AdicionarQuestao(Questao questao)
 		{
 			_questaoService.AdicionarQuestao(questao);
-
 			return Ok(questao);
 		}
 
@@ -52,8 +49,27 @@ namespace IAE.Web.Controllers
 		public ActionResult ApagarQuestao(int id)
 		{
 			_questaoService.ApagarQuestao(id);
-
 			return Content($"Questão #{id} apagada com sucesso.");
 		}
-	}
+        // GET: Questao/ListarQuestoes
+        [HttpGet(Name = "Questoes")]
+        [SwaggerOperation(Summary = "Listar todas as questões")]
+        [SwaggerResponse(200, "Lista de questões.", typeof(IEnumerable<Questao>))]
+        public ActionResult<IEnumerable<Questao>> ListarQuestoes()
+        {
+            var questoes = _questaoService.ListarQuestoes();
+            return Ok(questoes);
+        }
+
+        // PUT: Questao/AtualizarQuestao
+        [HttpPut]
+        [SwaggerOperation(Summary = "Atualizar uma questão existente")]
+        [SwaggerResponse(200, "Questão atualizada.", typeof(Questao))]
+        [SwaggerResponse(400, "Dados fornecidos inválidos")]
+        public ActionResult AtualizarQuestao(Questao questao)
+        {
+            _questaoService.AtualizarQuestao(questao);
+            return Ok(questao);
+        }
+    }
 }
