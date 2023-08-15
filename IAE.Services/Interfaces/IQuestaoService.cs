@@ -12,5 +12,6 @@ namespace IAE.Services.Interfaces
 		Questao ObterQuestao(int id);
 		void AdicionarQuestao(Questao questao);
 		void ApagarQuestao(int id);
+		IList<Questao> ObterQuestoes();
 	}
 }

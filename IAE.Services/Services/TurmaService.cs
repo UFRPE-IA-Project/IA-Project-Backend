@@ -18,5 +18,10 @@ namespace IAE.Services.Services
 		{
 			throw new NotImplementedException();
 		}
-	}
+        public Turma BuscarTurmaPorId(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+    }
 }
