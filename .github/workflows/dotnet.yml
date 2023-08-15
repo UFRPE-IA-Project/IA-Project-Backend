@@ -21,8 +21,8 @@ jobs:
       with:
         dotnet-version: 6.0.x
     - name: Restore dependencies
-      run: dotnet restore IAEducacional.sln
+      run: dotnet restore IAE.Web/IAEducacional.sln
     - name: Build
-      run: dotnet build IAEducacional.sln --configuration Debug
+      run: dotnet build IAE.Web/IAEducacional.sln --configuration Debug
     - name: Test
-      run: dotnet test IAEducacional.sln --configuration Debug --no-build --verbosity normal
+      run: dotnet test IAE.Web/IAEducacional.sln --configuration Debug --no-build --verbosity normal
