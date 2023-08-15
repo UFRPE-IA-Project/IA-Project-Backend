@@ -20,23 +20,47 @@ namespace IAE.Services.Services
         }
         public Avaliacao GerarSimulado(int turmaId)
         {
-            
             Avaliacao avaliacao = new Avaliacao();
             avaliacao.TipoAvaliacao = TipoAvaliacao.Simulado;
-            
-            
             
             return avaliacao;
         }
         public Avaliacao GerarProva(int turmaId)
         {
-
             Avaliacao avaliacao = new Avaliacao();
             avaliacao.TipoAvaliacao = TipoAvaliacao.Prova;
            
-
-
             return avaliacao;
+        }
+
+        public void Insert(Avaliacao avaliacao)
+        {
+            _avaliacaoRepository.Insert(avaliacao);
+        }
+
+        public void Insert(IList<Avaliacao> avaliacoes)
+        {
+            _avaliacaoRepository.Insert(avaliacoes);
+        }
+
+        public Avaliacao GetById(int id)
+        {
+            return _avaliacaoRepository.GetById(id);
+        }
+
+        public IList<Avaliacao> GetAll()
+        {
+            return _avaliacaoRepository.GetAll();
+        }
+
+        public void Update(Avaliacao avaliacao)
+        {
+            _avaliacaoRepository.Update(avaliacao);
+        }
+
+        public void Delete(int id)
+        {
+            _avaliacaoRepository.Delete(id);
         }
     }
 }

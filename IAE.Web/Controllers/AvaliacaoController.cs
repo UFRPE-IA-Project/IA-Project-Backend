@@ -20,20 +20,17 @@ namespace IAE.Web.Controllers
             _avaliacaoService = avaliacaoService;
         }
 
-
         // POST: Avaliacao/PostSimulado
         [HttpPost]
         [SwaggerOperation(Summary = "Obter um Simulado")]
         [SwaggerResponse(200)]
         [SwaggerResponse(400)]
         public Avaliacao GerarSimulado(int turmaId)
-            
         {
             var avaliacao = _avaliacaoService.GerarSimulado(turmaId);
-
             return avaliacao;
         }
-        
+
         // POST: Avaliacao/PostProva
         [HttpPost]
         [SwaggerOperation(Summary = "Obter uma Prova")]
@@ -42,9 +39,51 @@ namespace IAE.Web.Controllers
         public Avaliacao GerarProva(int turmaId)
         {
             var avaliacao = _avaliacaoService.GerarProva(turmaId);
-
             return avaliacao;
         }
 
+        [HttpPost]
+        public ActionResult<Avaliacao> CreateAvaliacao(Avaliacao avaliacao)
+        {
+            _avaliacaoService.Insert(avaliacao);
+            return CreatedAtAction(nameof(GetAvaliacaoById), new { id = avaliacao.Id }, avaliacao);
+        }
+
+        [HttpGet("{id}")]
+        public ActionResult<Avaliacao> GetAvaliacaoById(int id)
+        {
+            var avaliacao = _avaliacaoService.GetById(id);
+            if (avaliacao == null)
+            {
+                return NotFound();
+            }
+            return avaliacao;
+        }
+
+        [HttpGet]
+        public ActionResult<IEnumerable<Avaliacao>> GetAllAvaliacoes()
+        {
+            return _avaliacaoService.GetAll();
+        }
+
+        [HttpPut("{id}")]
+        public IActionResult UpdateAvaliacao(int id, Avaliacao avaliacao)
+        {
+            if (id != avaliacao.Id)
+            {
+                return BadRequest();
+            }
+
+            _avaliacaoService.Update(avaliacao);
+
+            return NoContent();
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult DeleteAvaliacao(int id)
+        {
+            _avaliacaoService.Delete(id);
+            return NoContent();
+        }
     }
 }
