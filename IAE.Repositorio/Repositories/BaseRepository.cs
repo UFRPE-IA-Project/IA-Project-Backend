@@ -39,7 +39,7 @@ namespace IAE.Repository.Repositories
 			using (IDbConnection connection = new SQLiteConnection(_connectionString))
 			{
 				connection.Open();
-				return connection.QueryFirstOrDefault<T>("SELECT * FROM " + typeof(T).Name + " WHERE Id = @Id", new { Id = key });
+				return connection.QuerySingleOrDefault<T>("SELECT * FROM " + typeof(T).Name + " WHERE Id = @Id", new { Id = key });
 			}
 		}
 
