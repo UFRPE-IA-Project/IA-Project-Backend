@@ -21,16 +21,27 @@ namespace IAE.Services.Services
         public Questao ObterQuestao(int id)
         {
             var questao = _questaoRepository.FindById(id);
+
             return questao;
         }
 
         public void AdicionarQuestao(Questao questao)
         {
-            var idQuestao = _questaoRepository.Add(questao);
+            var questaoDb = _questaoRepository.Insert(questao);
 
-            if (idQuestao != -1)
+            if (questaoDb is null)
             {
                 throw new Exception("Não foi possível adicionar a questão");
+            }
+        }
+
+        public void AtualizarQuestao(Questao questao)
+        {
+            var questaoDb = _questaoRepository.Update(questao);
+
+            if (questaoDb is null)
+            {
+                throw new Exception("Não foi possível atualizar a questão");
             }
         }
 
@@ -41,21 +52,6 @@ namespace IAE.Services.Services
             if (qtdDeletada != -1)
             {
                 throw new Exception("Não foi possível apagar a questão");
-            }
-        }
-
-        public IEnumerable<Questao> ListarQuestoes()
-        {
-            var questoes = _questaoRepository.GetAll();
-            return questoes;
-        }
-
-        public void AtualizarQuestao(Questao questao)
-        {
-            var questaoAtualizada = _questaoRepository.Update(questao);
-            if (questaoAtualizada is null)
-            {
-                throw new Exception("Não foi possível atualizar a questão");
             }
         }
     }
