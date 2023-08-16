@@ -479,11 +479,26 @@
         "properties": {
           "id": {
             "type": "integer",
-            "format": "int32",
-            "nullable": true
+            "format": "int32"
           },
           "tipoAvaliacao": {
             "$ref": "#/components/schemas/TipoAvaliacao"
+          },
+          "idTurma": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "idProfessor": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "idsQuestoes": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "nullable": true
           },
           "turma": {
             "$ref": "#/components/schemas/Turma"
@@ -513,21 +528,36 @@
         "properties": {
           "id": {
             "type": "integer",
-            "format": "int32",
-            "nullable": true
+            "format": "int32"
           },
-          "prova": {
-            "$ref": "#/components/schemas/Avaliacao"
+          "idProva": {
+            "type": "integer",
+            "format": "int32"
           },
           "valorNota": {
             "type": "number",
             "format": "double"
           },
-          "aluno": {
-            "$ref": "#/components/schemas/Usuario"
+          "idAluno": {
+            "type": "integer",
+            "format": "int32"
           },
           "tipoAvaliacao": {
             "$ref": "#/components/schemas/TipoAvaliacao"
+          },
+          "idProfessor": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "idTurma": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "prova": {
+            "$ref": "#/components/schemas/Avaliacao"
+          },
+          "aluno": {
+            "$ref": "#/components/schemas/Usuario"
           },
           "turma": {
             "$ref": "#/components/schemas/Turma"
@@ -540,8 +570,7 @@
         "properties": {
           "id": {
             "type": "integer",
-            "format": "int32",
-            "nullable": true
+            "format": "int32"
           },
           "nome": {
             "type": "string",
@@ -581,8 +610,7 @@
         "properties": {
           "id": {
             "type": "integer",
-            "format": "int32",
-            "nullable": true
+            "format": "int32"
           },
           "enunciado": {
             "type": "string",
@@ -594,6 +622,13 @@
               "$ref": "#/components/schemas/Resposta"
             },
             "nullable": true
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -603,8 +638,7 @@
         "properties": {
           "id": {
             "type": "integer",
-            "format": "int32",
-            "nullable": true
+            "format": "int32"
           },
           "referencia": {
             "type": "string",
@@ -659,12 +693,19 @@
         "properties": {
           "id": {
             "type": "integer",
-            "format": "int32",
-            "nullable": true
+            "format": "int32"
           },
           "codigoTurma": {
             "type": "string",
             "nullable": true
+          },
+          "idProfessor": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "idPlanoEnsino": {
+            "type": "integer",
+            "format": "int32"
           },
           "professor": {
             "$ref": "#/components/schemas/Usuario"
@@ -687,8 +728,7 @@
         "properties": {
           "id": {
             "type": "integer",
-            "format": "int32",
-            "nullable": true
+            "format": "int32"
           },
           "nome": {
             "type": "string",
