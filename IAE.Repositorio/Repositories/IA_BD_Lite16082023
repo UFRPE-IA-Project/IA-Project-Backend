@@ -1,0 +1,92 @@
+CREATE TABLE Usuario (
+    Id          INTEGER       PRIMARY KEY AUTOINCREMENT
+                              NOT NULL,
+    Nome        VARCHAR (100) NOT NULL,
+    Sobrenome   VARCHAR (100) NOT NULL,
+    Email       VARCHAR (100) NOT NULL,
+    Telefone    VARCHAR (20),
+    TipoUsuario TEXT          CHECK (TipoUsuario IN ('Aluno', 'Professor') ) 
+                              NOT NULL
+);
+
+CREATE TABLE Turma (
+    Id            INTEGER      PRIMARY KEY AUTOINCREMENT,
+    CodigoTurma   VARCHAR (10) NOT NULL,
+    UsuarioId   INTEGER      NOT NULL,
+    PlanoEnsinoId INTEGER      NOT NULL,
+    FOREIGN KEY (
+        UsuarioId
+    )
+    REFERENCES Usuario (Id),
+    FOREIGN KEY (
+        PlanoEnsinoId
+    )
+    REFERENCES PlanoEnsino (Id) 
+);
+
+CREATE TABLE Resposta (
+    Id                INTEGER PRIMARY KEY,
+    EnunciadoResposta TEXT,
+    IsRespostaCorreta INTEGER NOT NULL
+                              CHECK (IsRespostaCorreta IN (0, 1) ),
+    QuestaoId         INTEGER NOT NULL,
+    FOREIGN KEY (
+        QuestaoId
+    )
+    REFERENCES Questao (Id) 
+);
+
+CREATE TABLE Questao (
+    Id          INTEGER PRIMARY KEY AUTOINCREMENT
+                        NOT NULL,
+    Enunciado   TEXT    NOT NULL,
+    AvaliacaoId INTEGER NOT NULL,
+    FOREIGN KEY (
+        AvaliacaoId
+    )
+    REFERENCES Avaliacao (Id) 
+);
+CREATE TABLE PlanoEnsino (
+    Id             INTEGER       PRIMARY KEY AUTOINCREMENT,
+    Nome           VARCHAR (100) NOT NULL,
+    NomeDisciplina VARCHAR (100) NOT NULL,
+    Escolaridade   VARCHAR (100) NOT NULL,
+    CargaHoraria   REAL          NOT NULL
+);
+CREATE TABLE Nota (
+    Id            INTEGER PRIMARY KEY,
+    ValorNota     REAL    NOT NULL,
+    ProvaId       INTEGER NOT NULL,
+    UsuarioId     INTEGER NOT NULL,
+    TipoAvaliacao TEXT    CHECK (TipoAvaliacao IN ('Prova', 'Outro') ) 
+                          NOT NULL,
+    TurmaId       INTEGER NOT NULL,
+    FOREIGN KEY (
+        ProvaId
+    )
+    REFERENCES Avaliacao (Id),
+    FOREIGN KEY (
+        UsuarioId
+    )
+    REFERENCES Aluno (Id),
+    FOREIGN KEY (
+        TurmaId
+    )
+    REFERENCES Turma (Id) 
+);
+CREATE TABLE Avaliacao (
+    Id            INTEGER PRIMARY KEY AUTOINCREMENT
+                          NOT NULL,
+    TipoAvaliacao TEXT    CHECK (TipoAvaliacao IN ('Prova', 'Outro') ) 
+                          NOT NULL,
+    TurmaId       INTEGER NOT NULL,
+    UsuarioId   INTEGER NOT NULL,
+    FOREIGN KEY (
+        TurmaId
+    )
+    REFERENCES Turma (Id),
+    FOREIGN KEY (
+        UsuarioId
+    )
+    REFERENCES Professor (Id) 
+);
