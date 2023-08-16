@@ -337,7 +337,7 @@
         "tags": [
           "Questao"
         ],
-        "summary": "Obter uma uma questão",
+        "summary": "Obter uma questão",
         "operationId": "Questao",
         "parameters": [
           {
@@ -423,7 +423,59 @@
             }
           },
           "400": {
-            "description": "Dado fornacido inválido"
+            "description": "Dado fornecido inválido"
+          }
+        }
+      }
+    },
+    "/Questao/AtualizarQuestao": {
+      "put": {
+        "tags": [
+          "Questao"
+        ],
+        "summary": "Atualizar uma questão",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Questao"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Questao"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Questao"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Questão atualizada.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Questao"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Questao"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Questao"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Dado fornecido inválido"
           }
         }
       }
@@ -433,7 +485,7 @@
         "tags": [
           "Questao"
         ],
-        "summary": "Apaga uma questão apartir do id fornecido",
+        "summary": "Apagar uma questão a partir do id fornecido",
         "parameters": [
           {
             "name": "id",

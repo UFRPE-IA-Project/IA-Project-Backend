@@ -33,9 +33,9 @@ namespace IAE.Repository.Repositories
 
 						var idUsuario = connection.ExecuteScalar<int>(insertQuery, item, transaction);
 
-						var novoUsuario = FindById(idUsuario);
-
 						transaction.Commit();
+
+						var novoUsuario = FindById(idUsuario);
 
 						return novoUsuario;
 					}
@@ -93,9 +93,9 @@ namespace IAE.Repository.Repositories
 
 						connection.Execute(insertQuery, usuario);
 
-						var usuarioAtualizado = FindById(usuario.Id!.Value);
-
 						transaction.Commit();
+
+						var usuarioAtualizado = FindById(usuario.Id!.Value);
 
 						return usuarioAtualizado;
 					}
