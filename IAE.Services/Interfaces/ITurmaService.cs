@@ -7,4 +7,5 @@ namespace IAE.Services.Interfaces
     {
         List<Turma> BuscarTurmasPorUsuario(Usuario usuario);
         Turma BuscarTurmaPorId(int id);
+    }
 }
