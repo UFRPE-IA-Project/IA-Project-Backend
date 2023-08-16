@@ -91,6 +91,247 @@
         }
       }
     },
+    "/PlanoEnsino/GetPlanoEnsino": {
+      "get": {
+        "tags": [
+          "PlanoEnsino"
+        ],
+        "operationId": "PlanoEnsino",
+        "parameters": [
+          {
+            "name": "idPlanoEnsino",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlanoEnsino"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlanoEnsino"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlanoEnsino"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/PlanoEnsino/ObterTodosPlanoEnsinos": {
+      "get": {
+        "tags": [
+          "PlanoEnsino"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PlanoEnsino"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PlanoEnsino"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PlanoEnsino"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/PlanoEnsino/GetPlanoEnsinos": {
+      "get": {
+        "tags": [
+          "PlanoEnsino"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PlanoEnsino"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PlanoEnsino"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PlanoEnsino"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/PlanoEnsino/AtualizarPlanoEnsino": {
+      "post": {
+        "tags": [
+          "PlanoEnsino"
+        ],
+        "parameters": [
+          {
+            "name": "idPlanoEnsino",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PlanoEnsinoDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PlanoEnsinoDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/PlanoEnsinoDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/PlanoEnsino/AdicionarPlanoEnsino": {
+      "post": {
+        "tags": [
+          "PlanoEnsino"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PlanoEnsinoDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PlanoEnsinoDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/PlanoEnsinoDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/PlanoEnsino/ExcluirPlanoEnsino": {
+      "delete": {
+        "tags": [
+          "PlanoEnsino"
+        ],
+        "parameters": [
+          {
+            "name": "idPlanoEnsino",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
     "/Questao/ObterQuestao": {
       "get": {
         "tags": [
@@ -485,6 +726,22 @@
           "tipoAvaliacao": {
             "$ref": "#/components/schemas/TipoAvaliacao"
           },
+          "idTurma": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "idProfessor": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "idsQuestoes": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "nullable": true
+          },
           "turma": {
             "$ref": "#/components/schemas/Turma"
           },
@@ -516,18 +773,34 @@
             "format": "int32",
             "nullable": true
           },
-          "prova": {
-            "$ref": "#/components/schemas/Avaliacao"
+          "idProva": {
+            "type": "integer",
+            "format": "int32"
           },
           "valorNota": {
             "type": "number",
             "format": "double"
           },
-          "aluno": {
-            "$ref": "#/components/schemas/Usuario"
+          "idAluno": {
+            "type": "integer",
+            "format": "int32"
           },
           "tipoAvaliacao": {
             "$ref": "#/components/schemas/TipoAvaliacao"
+          },
+          "idProfessor": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "idTurma": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "prova": {
+            "$ref": "#/components/schemas/Avaliacao"
+          },
+          "aluno": {
+            "$ref": "#/components/schemas/Usuario"
           },
           "turma": {
             "$ref": "#/components/schemas/Turma"
@@ -536,6 +809,47 @@
         "additionalProperties": false
       },
       "PlanoEnsino": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "nome": {
+            "type": "string",
+            "nullable": true
+          },
+          "nomeDisciplina": {
+            "type": "string",
+            "nullable": true
+          },
+          "escolaridade": {
+            "type": "string",
+            "nullable": true
+          },
+          "cargaHoraria": {
+            "type": "number",
+            "format": "double"
+          },
+          "referenciasBibliograficas": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ReferenciaBibliografica"
+            },
+            "nullable": true
+          },
+          "topicosAbordados": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PlanoEnsinoDTO": {
         "type": "object",
         "properties": {
           "id": {
@@ -592,6 +906,13 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Resposta"
+            },
+            "nullable": true
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
             },
             "nullable": true
           }
@@ -666,6 +987,14 @@
             "type": "string",
             "nullable": true
           },
+          "idProfessor": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "idPlanoEnsino": {
+            "type": "integer",
+            "format": "int32"
+          },
           "professor": {
             "$ref": "#/components/schemas/Usuario"
           },
@@ -737,6 +1066,11 @@
       "UsuarioDTO": {
         "type": "object",
         "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
           "nome": {
             "type": "string",
             "nullable": true
