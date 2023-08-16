@@ -91,12 +91,253 @@
         }
       }
     },
+    "/PlanoEnsino/GetPlanoEnsino": {
+      "get": {
+        "tags": [
+          "PlanoEnsino"
+        ],
+        "operationId": "PlanoEnsino",
+        "parameters": [
+          {
+            "name": "idPlanoEnsino",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlanoEnsino"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlanoEnsino"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlanoEnsino"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/PlanoEnsino/ObterTodosPlanoEnsinos": {
+      "get": {
+        "tags": [
+          "PlanoEnsino"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PlanoEnsino"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PlanoEnsino"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PlanoEnsino"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/PlanoEnsino/GetPlanoEnsinos": {
+      "get": {
+        "tags": [
+          "PlanoEnsino"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PlanoEnsino"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PlanoEnsino"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PlanoEnsino"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/PlanoEnsino/AtualizarPlanoEnsino": {
+      "post": {
+        "tags": [
+          "PlanoEnsino"
+        ],
+        "parameters": [
+          {
+            "name": "idPlanoEnsino",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PlanoEnsinoDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PlanoEnsinoDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/PlanoEnsinoDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/PlanoEnsino/AdicionarPlanoEnsino": {
+      "post": {
+        "tags": [
+          "PlanoEnsino"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PlanoEnsinoDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PlanoEnsinoDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/PlanoEnsinoDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/PlanoEnsino/ExcluirPlanoEnsino": {
+      "delete": {
+        "tags": [
+          "PlanoEnsino"
+        ],
+        "parameters": [
+          {
+            "name": "idPlanoEnsino",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
     "/Questao/ObterQuestao": {
       "get": {
         "tags": [
           "Questao"
         ],
-        "summary": "Obter uma uma questão",
+        "summary": "Obter uma questão",
         "operationId": "Questao",
         "parameters": [
           {
@@ -182,7 +423,59 @@
             }
           },
           "400": {
-            "description": "Dado fornacido inválido"
+            "description": "Dado fornecido inválido"
+          }
+        }
+      }
+    },
+    "/Questao/AtualizarQuestao": {
+      "put": {
+        "tags": [
+          "Questao"
+        ],
+        "summary": "Atualizar uma questão",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Questao"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Questao"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Questao"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Questão atualizada.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Questao"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Questao"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Questao"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Dado fornecido inválido"
           }
         }
       }
@@ -192,7 +485,7 @@
         "tags": [
           "Questao"
         ],
-        "summary": "Apaga uma questão apartir do id fornecido",
+        "summary": "Apagar uma questão a partir do id fornecido",
         "parameters": [
           {
             "name": "id",
@@ -605,6 +898,47 @@
         },
         "additionalProperties": false
       },
+      "PlanoEnsinoDTO": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "nome": {
+            "type": "string",
+            "nullable": true
+          },
+          "nomeDisciplina": {
+            "type": "string",
+            "nullable": true
+          },
+          "escolaridade": {
+            "type": "string",
+            "nullable": true
+          },
+          "cargaHoraria": {
+            "type": "number",
+            "format": "double"
+          },
+          "referenciasBibliograficas": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ReferenciaBibliografica"
+            },
+            "nullable": true
+          },
+          "topicosAbordados": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "Questao": {
         "type": "object",
         "properties": {
@@ -777,6 +1111,11 @@
       "UsuarioDTO": {
         "type": "object",
         "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
           "nome": {
             "type": "string",
             "nullable": true

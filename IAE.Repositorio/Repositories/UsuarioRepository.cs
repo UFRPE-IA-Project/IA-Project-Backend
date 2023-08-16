@@ -23,43 +23,89 @@ namespace IAE.Repository.Repositories
 			using (IDbConnection connection = new SQLiteConnection(_connectionString))
 			{
 				connection.Open();
+				using (var transaction = connection.BeginTransaction())
+				{
+					try
+					{
+						var insertQuery = "INSERT INTO Usuario (Nome, Sobrenome, Telefone, TipoUsuario, Email) " +
+								 "VALUES (@Nome, @Sobrenome, @Telefone, @TipoUsuario, @Email); " +
+								 "SELECT last_insert_rowid();";
 
-				string insertQuery = "INSERT INTO Usuario (Nome, Sobrenome, Telefone, TipoUsuario, Email) " +
-								 "VALUES (@Nome, @Sobrenome, @Telefone, @TipoUsuario, @Email)";
+						var idUsuario = connection.ExecuteScalar<int>(insertQuery, item, transaction);
 
-				connection.Execute(insertQuery, item);
-				return item;
+						transaction.Commit();
+
+						var novoUsuario = FindById(idUsuario);
+
+						return novoUsuario;
+					}
+					catch (Exception ex)
+					{
+						transaction.Rollback();
+						throw new ArgumentException($"Houve algum problema ao inserir os dados do usuário. Erro: {ex.Message}");
+					}
+				}
 			}
 		}
 
 		public override int Insert(IList<Usuario> items)
 		{
+			int linhasAfetadas = 0;
 			using (IDbConnection connection = new SQLiteConnection(_connectionString))
 			{
 				connection.Open();
-
-				string insertQuery = "INSERT INTO Usuario (Nome, Sobrenome, Telefone, TipoUsuario, Email) " +
+				using (var transaction = connection.BeginTransaction())
+				{
+					try
+					{
+						string insertQuery = "INSERT INTO Usuario (Nome, Sobrenome, Telefone, TipoUsuario, Email) " +
 								 "VALUES (@Nome, @Sobrenome, @Telefone, @TipoUsuario, @Email)";
 
-				var affectedColumns = connection.Execute(insertQuery, items);
+						linhasAfetadas = connection.Execute(insertQuery, items);
+						transaction.Commit();
+					}
+					catch (Exception ex)
+					{
+						transaction.Rollback();
+						throw new ArgumentException($"Houve algum problema ao inserir os dados dos usuários. Erro: {ex.Message}");
+					}
 
-				return affectedColumns;
+				}
+
+				return linhasAfetadas;
 			}
 		}
 
-		public override Usuario Update(Usuario item)
+		public override Usuario Update(Usuario usuario)
 		{
 			using (IDbConnection connection = new SQLiteConnection(_connectionString))
 			{
 				connection.Open();
-				string insertQuery = 
-					"UPDATE Usuario " +
-					"SET Nome = @Nome, Sobrenome = @Sobrenome, Telefone = @Telefone, TipoUsuario = @TipoUsuario, Email = @Email " +
-					"WHERE Id = @Id";
 
-				connection.Execute(insertQuery, item);
+				using (var transaction = connection.BeginTransaction())
+				{
+					try
+					{
+						string insertQuery =
+							"UPDATE Usuario " +
+							"SET Nome = @Nome, Sobrenome = @Sobrenome, Telefone = @Telefone, TipoUsuario = @TipoUsuario, Email = @Email " +
+							"WHERE Id = @Id";
 
-				return item;
+						connection.Execute(insertQuery, usuario);
+
+						transaction.Commit();
+
+						var usuarioAtualizado = FindById(usuario.Id!.Value);
+
+						return usuarioAtualizado;
+					}
+					catch (Exception ex)
+					{
+						transaction.Rollback();
+						throw new ArgumentException($"Houve algum problema atualizar os dados do usuário. Erro: {ex.Message}");
+					}
+
+				}
 			}
 		}
 	}

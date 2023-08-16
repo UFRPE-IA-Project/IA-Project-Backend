@@ -66,7 +66,8 @@ namespace IAE.Services.Services
 
             Turma turma = _turmaService.BuscarTurmaPorId(turmaId);
             IList<Questao> questoes = _questaoService.ObterQuestoes();
-            List<int> idsQuestoes = questoes.Select(q => q.Id).ToList();
+            List<int> idsQuestoes = questoes.Select(q => q.Id ?? 0).ToList();
+
 
             Avaliacao avaliacao = new Avaliacao();
             avaliacao.TipoAvaliacao = TipoAvaliacao.Prova;
@@ -82,7 +83,8 @@ namespace IAE.Services.Services
         {
             Turma turma = _turmaService.BuscarTurmaPorId(turmaId);
             IList <Questao> questoes = _questaoService.ObterQuestoes();
-            List<int> idsQuestoes = questoes.Select(q => q.Id).ToList();
+            List<int> idsQuestoes = questoes.Select(q => q.Id ?? 0).ToList();
+
 
             Avaliacao avaliacao = new Avaliacao();
             avaliacao.TipoAvaliacao = TipoAvaliacao.Prova;

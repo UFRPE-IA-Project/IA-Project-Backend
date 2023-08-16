@@ -10,7 +10,8 @@ namespace IAE.Entities.DTO
 {
 	public class UsuarioDTO
 	{
-		public string Nome { get; set; }
+        public int? Id { get; set; }
+        public string Nome { get; set; }
 		public string Sobrenome { get; set; }
 		public string Telefone { get; set; } = string.Empty;
 		public TipoUsuario TipoUsuario { get; set; }

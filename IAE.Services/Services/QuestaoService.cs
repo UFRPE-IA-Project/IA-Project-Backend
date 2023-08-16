@@ -10,47 +10,60 @@ using System.Threading.Tasks;
 
 namespace IAE.Services.Services
 {
-	public class QuestaoService : IQuestaoService
-	{
-		private readonly IQuestaoRepository _questaoRepository;
 
-		public QuestaoService(IQuestaoRepository questaoRepository)
-		{
-			_questaoRepository = questaoRepository;
-		}
+    public class QuestaoService : IQuestaoService
+    {
+        private readonly IQuestaoRepository _questaoRepository;
 
-		public Questao ObterQuestao(int id)
-		{
-			var questao = _questaoRepository.FindById(id);
-
-			return questao;
-		}
-
-		public void AdicionarQuestao(Questao questao)
-		{
-			var questaoDb = _questaoRepository.Insert(questao);
-
-			if (questaoDb is null)
-			{
-				throw new Exception("Não foi possível adicionar a questão");
-			}
-		}
-
-		public void ApagarQuestao(int id)
-		{
-			var qtdDeletada = _questaoRepository.Delete(id);
-
-			if (qtdDeletada != -1)
-			{
-				throw new Exception("Não foi possível apagar a questão");
-			}
-		}
-
-		public IList<Questao> ObterQuestoes()
-		{
-			var questoes = _questaoRepository.FindAll();
-
-			return questoes;
+        public QuestaoService(IQuestaoRepository questaoRepository)
+        {
+            _questaoRepository = questaoRepository;
         }
+
+        public Questao ObterQuestao(int id)
+        {
+            var questao = _questaoRepository.FindById(id);
+
+            return questao;
+        }
+
+        public void AdicionarQuestao(Questao questao)
+        {
+            var questaoDb = _questaoRepository.Insert(questao);
+
+            if (questaoDb is null)
+            {
+                throw new Exception("Não foi possível adicionar a questão");
+            }
+        }
+
+        public void AtualizarQuestao(Questao questao)
+        {
+            var questaoDb = _questaoRepository.Update(questao);
+
+            if (questaoDb is null)
+            {
+                throw new Exception("Não foi possível atualizar a questão");
+            }
+        }
+
+        public void ApagarQuestao(int id)
+        {
+            var qtdDeletada = _questaoRepository.Delete(id);
+
+            if (qtdDeletada != -1)
+            {
+                throw new Exception("Não foi possível apagar a questão");
+            }
+
+        }
+
+        public IList<Questao> ObterQuestoes(){
+
+            var questoes = _questaoRepository.FindAll();
+
+            return questoes;
+        }
+
     }
 }
