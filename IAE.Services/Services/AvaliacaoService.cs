@@ -18,49 +18,44 @@ namespace IAE.Services.Services
         {
             _avaliacaoRepository = avaliacaoRepository;
         }
+
         public Avaliacao GerarSimulado(int turmaId)
         {
             Avaliacao avaliacao = new Avaliacao();
             avaliacao.TipoAvaliacao = TipoAvaliacao.Simulado;
-            
             return avaliacao;
         }
+
         public Avaliacao GerarProva(int turmaId)
         {
             Avaliacao avaliacao = new Avaliacao();
             avaliacao.TipoAvaliacao = TipoAvaliacao.Prova;
-           
             return avaliacao;
         }
 
-        public void Insert(Avaliacao avaliacao)
+        public List<Avaliacao> BuscarAvaliacoes()
         {
-            _avaliacaoRepository.Insert(avaliacao);
+            return _avaliacaoRepository.FindAll();
         }
 
-        public void Insert(IList<Avaliacao> avaliacoes)
+        public Avaliacao InserirAvaliacao(Avaliacao avaliacao)
         {
-            _avaliacaoRepository.Insert(avaliacoes);
+            return _avaliacaoRepository.Insert(avaliacao);
         }
 
-        public Avaliacao GetById(int id)
+        public int InserirAvaliacoes(List<Avaliacao> avaliacoes)
         {
-            return _avaliacaoRepository.GetById(id);
+            return _avaliacaoRepository.Insert(avaliacoes);
         }
 
-        public IList<Avaliacao> GetAll()
+        public Avaliacao AtualizarAvaliacao(Avaliacao avaliacao)
         {
-            return _avaliacaoRepository.GetAll();
+            return _avaliacaoRepository.Update(avaliacao);
         }
 
-        public void Update(Avaliacao avaliacao)
+        public int ExcluirAvaliacao(int id)
         {
-            _avaliacaoRepository.Update(avaliacao);
-        }
-
-        public void Delete(int id)
-        {
-            _avaliacaoRepository.Delete(id);
+            return _avaliacaoRepository.Delete(id);
         }
     }
 }

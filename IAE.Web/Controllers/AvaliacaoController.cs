@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.JsonPatch.Operations;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 using System.Net;
+using System.Collections.Generic;
 
 namespace IAE.Web.Controllers
 {
@@ -20,7 +21,6 @@ namespace IAE.Web.Controllers
             _avaliacaoService = avaliacaoService;
         }
 
-        // POST: Avaliacao/PostSimulado
         [HttpPost]
         [SwaggerOperation(Summary = "Obter um Simulado")]
         [SwaggerResponse(200)]
@@ -31,7 +31,6 @@ namespace IAE.Web.Controllers
             return avaliacao;
         }
 
-        // POST: Avaliacao/PostProva
         [HttpPost]
         [SwaggerOperation(Summary = "Obter uma Prova")]
         [SwaggerResponse(200)]
@@ -42,48 +41,32 @@ namespace IAE.Web.Controllers
             return avaliacao;
         }
 
-        [HttpPost]
-        public ActionResult<Avaliacao> CreateAvaliacao(Avaliacao avaliacao)
-        {
-            _avaliacaoService.Insert(avaliacao);
-            return CreatedAtAction(nameof(GetAvaliacaoById), new { id = avaliacao.Id }, avaliacao);
-        }
-
-        [HttpGet("{id}")]
-        public ActionResult<Avaliacao> GetAvaliacaoById(int id)
-        {
-            var avaliacao = _avaliacaoService.GetById(id);
-            if (avaliacao == null)
-            {
-                return NotFound();
-            }
-            return avaliacao;
-        }
-
         [HttpGet]
-        public ActionResult<IEnumerable<Avaliacao>> GetAllAvaliacoes()
+        public List<Avaliacao> BuscarAvaliacoes()
         {
-            return _avaliacaoService.GetAll();
+            var avaliacoes = _avaliacaoService.BuscarAvaliacoes();
+            return avaliacoes;
         }
 
-        [HttpPut("{id}")]
-        public IActionResult UpdateAvaliacao(int id, Avaliacao avaliacao)
+        [HttpPost]
+        public Avaliacao InserirAvaliacao(Avaliacao avaliacao)
         {
-            if (id != avaliacao.Id)
-            {
-                return BadRequest();
-            }
-
-            _avaliacaoService.Update(avaliacao);
-
-            return NoContent();
+            var resultado = _avaliacaoService.InserirAvaliacao(avaliacao);
+            return resultado;
         }
 
-        [HttpDelete("{id}")]
-        public IActionResult DeleteAvaliacao(int id)
+        [HttpPut]
+        public Avaliacao AtualizarAvaliacao(Avaliacao avaliacao)
         {
-            _avaliacaoService.Delete(id);
-            return NoContent();
+            var resultado = _avaliacaoService.AtualizarAvaliacao(avaliacao);
+            return resultado;
+        }
+
+        [HttpDelete]
+        public int ExcluirAvaliacao(int id)
+        {
+            var resultado = _avaliacaoService.ExcluirAvaliacao(id);
+            return resultado;
         }
     }
 }
