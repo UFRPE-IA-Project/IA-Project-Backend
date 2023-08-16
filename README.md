@@ -2,13 +2,21 @@
 API do projeto de IA educacional da disciplina Engenharia de Software ministrado pelo Prof. Dr. Leandro Marques. A API é escrita com base em C# e .NET 6.
 <br/>
 <h2>Participantes</h2>
-<p>Anderson Souza - Frontend<br>
+Anderson Souza - Frontend<br>
 André lima - Frontend/Infra<br>
 Diego Passos- Backend<br>
 Gilmar Campelo - Database e apoio geral<br>
 Kleyton Clementino - Backend/Infra<br>
 Samuel Alves - Frontend<br>
 Victor Anunciação - Backend<br>
+<br/>
+
+<h2>Links importantes</h2>
+
+  [Macroarquitetura do projeto](https://github.com/UFRPE-IA-Project/IA-Project-Backend/blob/Develop/Documentos%20-%20Arquitetura%20da%20Solu%C3%A7%C3%A3o/Macroarquitetura.md) <br>
+  [Todos os documentos](https://github.com/UFRPE-IA-Project/IA-Project-Backend/tree/Develop/Documentos%20-%20Arquitetura%20da%20Solu%C3%A7%C3%A3o)<br>
+  [Documentação API](https://github.com/UFRPE-IA-Project/IA-Project-Backend/blob/Develop/IAE.Web/swagger.json) -- Formato .json que pode ser acessado copiando o arquivo e colando no [Swagger Editor](https://editor.swagger.io/)<br>
+  [Quadro Kanban](https://github.com/orgs/UFRPE-IA-Project/projects/1)<br>
 <br/>
 
 <h2> Proposta da aplicação </h2>
