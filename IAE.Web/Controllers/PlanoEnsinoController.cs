@@ -70,7 +70,6 @@ namespace IAE.Web.Controllers
 		public ActionResult ExcluirPlanoEnsino(int idPlanoEnsino)
 		{
 			_planoEnsinoService.ExcluirPlanoEnsino(idPlanoEnsino);
-
 			return Content("Plano de Ensino excluído com sucesso.");
 		}
 	}
