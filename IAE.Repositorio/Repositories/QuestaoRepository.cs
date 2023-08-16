@@ -6,28 +6,48 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Dapper;
+using System.Data.SQLite;
+using System.Data;
 
 namespace IAE.Repository.Repositories
 {
-	public class QuestaoRepository : BaseRepository<Questao>, IQuestaoRepository
-	{
-		public QuestaoRepository(IConfiguration config) : base(config)
-		{
-		}
+    public class QuestaoRepository : BaseRepository<Questao>, IQuestaoRepository
+    {
+        public QuestaoRepository(IConfiguration config) : base(config)
+        {
+        }
 
-		public override Questao Insert(Questao item)
-		{
-			throw new NotImplementedException();
-		}
+        public override Questao Insert(Questao item)
+        {
+            using (IDbConnection connection = new SQLiteConnection(_connectionString))
+            {
+                connection.Open();
+                string query = "INSERT INTO Questao (Enunciado, AvaliacaoId) VALUES (@Enunciado, @AvaliacaoId);";
+                connection.Execute(query, item);
+                return item;
+            }
+        }
 
-		public override int Insert(IList<Questao> items)
-		{
-			throw new NotImplementedException();
-		}
+        public override int Insert(IList<Questao> items)
+        {
+            using (IDbConnection connection = new SQLiteConnection(_connectionString))
+            {
+                connection.Open();
+                string query = "INSERT INTO Questao (Enunciado, AvaliacaoId) VALUES (@Enunciado, @AvaliacaoId);";
+                return connection.Execute(query, items);
+            }
+        }
 
-		public override Questao Update(Questao item)
-		{
-			throw new NotImplementedException();
-		}
-	}
+        public override Questao Update(Questao item)
+        {
+            using (IDbConnection connection = new SQLiteConnection(_connectionString))
+            {
+                connection.Open();
+                string query = "UPDATE Questao SET Enunciado = @Enunciado, AvaliacaoId = @AvaliacaoId WHERE Id = @Id;";
+                connection.Execute(query, item);
+                return item;
+            }
+        }
+    }
 }
