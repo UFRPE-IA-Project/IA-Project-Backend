@@ -1,12 +1,13 @@
 ﻿using IAE.Entidades.Entidades;
 using IAE.Entities.Entities;
-using IAE.Services.Interfaces;
+using IAE.Services.Interfaces; // Você pode remover esta linha se a classe AvaliacaoService não estiver mais implementando a interface
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.JsonPatch.Operations;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 using System.Net;
 using System.Collections.Generic;
+using IAE.Services.Services;
 
 namespace IAE.Web.Controllers
 {
@@ -14,13 +15,14 @@ namespace IAE.Web.Controllers
     [Route("[controller]/[action]")]
     public class AvaliacaoController : ControllerBase
     {
-        private readonly IAvaliacaoService _avaliacaoService;
+        private readonly AvaliacaoService _avaliacaoService; // Mudando de IAvaliacaoService para AvaliacaoService
 
-        public AvaliacaoController(IAvaliacaoService avaliacaoService)
+        public AvaliacaoController(AvaliacaoService avaliacaoService) // Mudando de IAvaliacaoService para AvaliacaoService
         {
             _avaliacaoService = avaliacaoService;
         }
 
+        // POST: Avaliacao/PostSimulado
         [HttpPost]
         [SwaggerOperation(Summary = "Obter um Simulado")]
         [SwaggerResponse(200)]
@@ -31,6 +33,7 @@ namespace IAE.Web.Controllers
             return avaliacao;
         }
 
+        // POST: Avaliacao/PostProva
         [HttpPost]
         [SwaggerOperation(Summary = "Obter uma Prova")]
         [SwaggerResponse(200)]
@@ -41,32 +44,35 @@ namespace IAE.Web.Controllers
             return avaliacao;
         }
 
-        [HttpGet]
-        public List<Avaliacao> BuscarAvaliacoes()
+        [HttpPost]
+        public ActionResult<Avaliacao> Create(Avaliacao avaliacao)
         {
-            var avaliacoes = _avaliacaoService.BuscarAvaliacoes();
-            return avaliacoes;
+            return Ok(_avaliacaoService.Create(avaliacao));
         }
 
-        [HttpPost]
-        public Avaliacao InserirAvaliacao(Avaliacao avaliacao)
+        [HttpGet]
+        public ActionResult<IEnumerable<Avaliacao>> ReadAll()
         {
-            var resultado = _avaliacaoService.InserirAvaliacao(avaliacao);
-            return resultado;
+            return Ok(_avaliacaoService.ReadAll());
+        }
+
+        [HttpGet]
+        public ActionResult<Avaliacao> ReadById(int id)
+        {
+            return Ok(_avaliacaoService.ReadById(id));
         }
 
         [HttpPut]
-        public Avaliacao AtualizarAvaliacao(Avaliacao avaliacao)
+        public ActionResult<Avaliacao> Update(Avaliacao avaliacao)
         {
-            var resultado = _avaliacaoService.AtualizarAvaliacao(avaliacao);
-            return resultado;
+            return Ok(_avaliacaoService.Update(avaliacao));
         }
 
         [HttpDelete]
-        public int ExcluirAvaliacao(int id)
+        public ActionResult Delete(int id)
         {
-            var resultado = _avaliacaoService.ExcluirAvaliacao(id);
-            return resultado;
+            _avaliacaoService.Delete(id);
+            return NoContent();
         }
     }
 }

@@ -91,6 +91,201 @@
         }
       }
     },
+    "/Avaliacao/Create": {
+      "post": {
+        "tags": [
+          "Avaliacao"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Avaliacao"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Avaliacao"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Avaliacao"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Avaliacao"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Avaliacao"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Avaliacao"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Avaliacao/ReadAll": {
+      "get": {
+        "tags": [
+          "Avaliacao"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Avaliacao"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Avaliacao"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Avaliacao"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Avaliacao/ReadById": {
+      "get": {
+        "tags": [
+          "Avaliacao"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Avaliacao"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Avaliacao"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Avaliacao"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Avaliacao/Update": {
+      "put": {
+        "tags": [
+          "Avaliacao"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Avaliacao"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Avaliacao"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Avaliacao"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Avaliacao"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Avaliacao"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Avaliacao"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Avaliacao/Delete": {
+      "delete": {
+        "tags": [
+          "Avaliacao"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
     "/Questao/ObterQuestao": {
       "get": {
         "tags": [
@@ -485,6 +680,22 @@
           "tipoAvaliacao": {
             "$ref": "#/components/schemas/TipoAvaliacao"
           },
+          "idTurma": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "idProfessor": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "idsQuestoes": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "nullable": true
+          },
           "turma": {
             "$ref": "#/components/schemas/Turma"
           },
@@ -516,18 +727,34 @@
             "format": "int32",
             "nullable": true
           },
-          "prova": {
-            "$ref": "#/components/schemas/Avaliacao"
+          "idProva": {
+            "type": "integer",
+            "format": "int32"
           },
           "valorNota": {
             "type": "number",
             "format": "double"
           },
-          "aluno": {
-            "$ref": "#/components/schemas/Usuario"
+          "idAluno": {
+            "type": "integer",
+            "format": "int32"
           },
           "tipoAvaliacao": {
             "$ref": "#/components/schemas/TipoAvaliacao"
+          },
+          "idProfessor": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "idTurma": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "prova": {
+            "$ref": "#/components/schemas/Avaliacao"
+          },
+          "aluno": {
+            "$ref": "#/components/schemas/Usuario"
           },
           "turma": {
             "$ref": "#/components/schemas/Turma"
@@ -592,6 +819,13 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Resposta"
+            },
+            "nullable": true
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
             },
             "nullable": true
           }
@@ -665,6 +899,14 @@
           "codigoTurma": {
             "type": "string",
             "nullable": true
+          },
+          "idProfessor": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "idPlanoEnsino": {
+            "type": "integer",
+            "format": "int32"
           },
           "professor": {
             "$ref": "#/components/schemas/Usuario"

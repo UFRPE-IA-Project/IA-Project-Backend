@@ -33,29 +33,31 @@ namespace IAE.Services.Services
             return avaliacao;
         }
 
-        public List<Avaliacao> BuscarAvaliacoes()
-        {
-            return _avaliacaoRepository.FindAll();
-        }
+        // Métodos CRUD
 
-        public Avaliacao InserirAvaliacao(Avaliacao avaliacao)
+        public Avaliacao Create(Avaliacao avaliacao)
         {
             return _avaliacaoRepository.Insert(avaliacao);
         }
 
-        public int InserirAvaliacoes(List<Avaliacao> avaliacoes)
+        public IEnumerable<Avaliacao> ReadAll()
         {
-            return _avaliacaoRepository.Insert(avaliacoes);
+            return _avaliacaoRepository.FindAll();
         }
 
-        public Avaliacao AtualizarAvaliacao(Avaliacao avaliacao)
+        public Avaliacao ReadById(int id)
+        {
+            return _avaliacaoRepository.FindById(id);
+        }
+
+        public Avaliacao Update(Avaliacao avaliacao)
         {
             return _avaliacaoRepository.Update(avaliacao);
         }
 
-        public int ExcluirAvaliacao(int id)
+        public void Delete(int id)
         {
-            return _avaliacaoRepository.Delete(id);
+            _avaliacaoRepository.Delete(id);
         }
     }
 }

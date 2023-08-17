@@ -49,5 +49,55 @@ namespace IAE.Repository.Repositories
                 return item;
             }
         }
+
+        public IList<Avaliacao> FindAll()
+        {
+            using (var connection = new SQLiteConnection(_connectionString))
+            {
+                connection.Open();
+                var query = "SELECT * FROM Avaliacao";
+                return connection.Query<Avaliacao>(query).ToList();
+            }
+        }
+
+        public Avaliacao FindById(int key)
+        {
+            using (var connection = new SQLiteConnection(_connectionString))
+            {
+                connection.Open();
+                var query = "SELECT * FROM Avaliacao WHERE Id = @Id";
+                return connection.QueryFirstOrDefault<Avaliacao>(query, new { Id = key });
+            }
+        }
+
+        public IList<Avaliacao> FindByIds(IEnumerable<int> keys)
+        {
+            using (var connection = new SQLiteConnection(_connectionString))
+            {
+                connection.Open();
+                var query = "SELECT * FROM Avaliacao WHERE Id IN @Ids";
+                return connection.Query<Avaliacao>(query, new { Ids = keys }).ToList();
+            }
+        }
+
+        public int Delete(int id)
+        {
+            using (var connection = new SQLiteConnection(_connectionString))
+            {
+                connection.Open();
+                var query = "DELETE FROM Avaliacao WHERE Id = @Id";
+                return connection.Execute(query, new { Id = id });
+            }
+        }
+
+        public int DeleteItens(IEnumerable<int> ids)
+        {
+            using (var connection = new SQLiteConnection(_connectionString))
+            {
+                connection.Open();
+                var query = "DELETE FROM Avaliacao WHERE Id IN @Ids";
+                return connection.Execute(query, new { Ids = ids });
+            }
+        }
     }
 }
