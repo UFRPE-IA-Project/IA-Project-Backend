@@ -8,6 +8,6 @@ namespace IAE.Entities.Entities
 {
 	public class BaseEntity
 	{
-        public int? Id { get; set; }
+        public int ?Id { get; set; }
     }
 }

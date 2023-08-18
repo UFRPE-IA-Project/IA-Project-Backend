@@ -16,7 +16,28 @@ namespace IAE.Services.Services
 
 		public List<Turma> BuscarTurmasPorUsuario(Usuario usuario)
 		{
-			throw new NotImplementedException();
-		}
-	}
+            return _turmaRepository.BuscarTurmasPorUsuario(usuario);
+        }
+        public Turma BuscarTurmaPorId(int id)
+        {
+            return _turmaRepository.FindById(id);
+        }
+        public void AdicionarTurma(Turma turma)
+        {
+            _turmaRepository.Insert(turma);
+        }
+        public void AtualizarTurma(Turma turma)
+        {
+            _turmaRepository.Update(turma);
+        }
+        public void ExcluirTurma(int id)
+        {
+            _turmaRepository.Delete(id);
+        }
+        public List<Turma> ObterTodasTurmas()
+        {
+            return _turmaRepository.FindAll().ToList();
+        }
+
+    }
 }

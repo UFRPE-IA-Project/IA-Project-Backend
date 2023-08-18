@@ -3,12 +3,14 @@ using IAE.Repository.Interfaces;
 using IAE.Services.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace IAE.Services.Services
 {
+
     public class QuestaoService : IQuestaoService
     {
         private readonly IQuestaoRepository _questaoRepository;
@@ -53,6 +55,15 @@ namespace IAE.Services.Services
             {
                 throw new Exception("Não foi possível apagar a questão");
             }
+
         }
+
+        public IList<Questao> ObterQuestoes(){
+
+            var questoes = _questaoRepository.FindAll();
+
+            return questoes;
+        }
+
     }
 }

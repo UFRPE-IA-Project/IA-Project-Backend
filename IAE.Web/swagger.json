@@ -772,8 +772,7 @@
         "properties": {
           "id": {
             "type": "integer",
-            "format": "int32",
-            "nullable": true
+            "format": "int32"
           },
           "tipoAvaliacao": {
             "$ref": "#/components/schemas/TipoAvaliacao"
@@ -822,8 +821,7 @@
         "properties": {
           "id": {
             "type": "integer",
-            "format": "int32",
-            "nullable": true
+            "format": "int32"
           },
           "idProva": {
             "type": "integer",
@@ -865,8 +863,7 @@
         "properties": {
           "id": {
             "type": "integer",
-            "format": "int32",
-            "nullable": true
+            "format": "int32"
           },
           "nome": {
             "type": "string",
@@ -947,8 +944,7 @@
         "properties": {
           "id": {
             "type": "integer",
-            "format": "int32",
-            "nullable": true
+            "format": "int32"
           },
           "enunciado": {
             "type": "string",
@@ -976,8 +972,7 @@
         "properties": {
           "id": {
             "type": "integer",
-            "format": "int32",
-            "nullable": true
+            "format": "int32"
           },
           "referencia": {
             "type": "string",
@@ -1032,8 +1027,7 @@
         "properties": {
           "id": {
             "type": "integer",
-            "format": "int32",
-            "nullable": true
+            "format": "int32"
           },
           "codigoTurma": {
             "type": "string",
@@ -1068,8 +1062,7 @@
         "properties": {
           "id": {
             "type": "integer",
-            "format": "int32",
-            "nullable": true
+            "format": "int32"
           },
           "nome": {
             "type": "string",
