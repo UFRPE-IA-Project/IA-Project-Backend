@@ -14,5 +14,7 @@ namespace IAE.Services.Interfaces
         void ApagarQuestao(int id);
         Questao AtualizarQuestao(int id, Questao questao);
 		List<Questao> ObterQuestoesPorQuantidade(int numeroQuestoes);
-	}
+        bool VerificarAlternativaCorreta(int questaoId, int alternativaEscolhida);
+
+    }
 }

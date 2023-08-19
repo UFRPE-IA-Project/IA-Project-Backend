@@ -86,5 +86,17 @@ namespace IAE.Services.Services
 
             return questoesEscolhidas;
 		}
-	}
+
+        public bool VerificarAlternativaCorreta(int questaoId, int alternativaEscolhida)
+        {
+            Questao questao = _questaoRepository.FindById(questaoId);
+
+            if (questao == null)
+            {
+                throw new Exception("Questão não encontrada");
+            }
+
+            return questao.AlternativaCorreta == alternativaEscolhida;
+        }
+    }
 }

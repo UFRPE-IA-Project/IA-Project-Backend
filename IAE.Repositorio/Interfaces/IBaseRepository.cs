@@ -17,7 +17,7 @@ namespace IAE.Repository.Interfaces
 
 
 		T Insert(T item);
-		int Insert(IList<T> itens);
+		//int Insert(IList<T> itens);
 		T Update(T item);
 	}
 }

@@ -34,7 +34,7 @@ namespace IAE.Repository.Repositories
             }
         }
 
-		public override int Insert(IList<Avaliacao> items)
+		public int Insert(IList<Avaliacao> items)
 		{
             using (IDbConnection connection = new SQLiteConnection(_connectionString))
             {

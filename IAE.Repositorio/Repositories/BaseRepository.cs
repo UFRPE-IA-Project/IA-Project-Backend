@@ -73,7 +73,7 @@ namespace IAE.Repository.Repositories
 		public abstract T Insert(T item);
 		//EXEMPLO DE COMO IMPLEMENTAR: ver UsuarioService
 
-		public abstract int Insert(IList<T> items);
+		//public abstract int Insert(IList<T> items);
 		//EXEMPLO DE COMO IMPLEMENTAR: ver UsuarioService
 
 
