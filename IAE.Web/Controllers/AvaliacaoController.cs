@@ -1,5 +1,6 @@
 ﻿using IAE.Entidades.Entidades;
 using IAE.Entities.Entities;
+using IAE.Entities.Enumarations;
 using IAE.Services.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.JsonPatch.Operations;
@@ -10,7 +11,7 @@ using System.Net;
 namespace IAE.Web.Controllers
 {
     [ApiController]
-    [Route("[controller]/[action]")]
+    [Route("api/[controller]")]
     public class AvaliacaoController : ControllerBase
     {
         private readonly IAvaliacaoService _avaliacaoService;
@@ -20,30 +21,59 @@ namespace IAE.Web.Controllers
             _avaliacaoService = avaliacaoService;
         }
 
+        [HttpGet("{id}")]
+		[SwaggerResponse(200)]
+		[SwaggerResponse(400)]
+		public ActionResult<Avaliacao> GetAvaliacao(int id)
+        {
+            var avaliacao = _avaliacaoService.GetAvaliacao(id);
 
-        // POST: Avaliacao/PostSimulado
-        [HttpPost]
+            return Ok(avaliacao);
+        }
+
+		[HttpGet("Turma/{id}")]
+		[SwaggerResponse(200)]
+		[SwaggerResponse(400)]
+		public ActionResult<Avaliacao> GetAvaliacoesPorIdTurma(int idTurma)
+		{
+			List<Avaliacao> avaliacoes = _avaliacaoService.GetAvaliacoesPorIdTurma(idTurma);
+
+			return Ok(avaliacoes);
+		}
+
+		[HttpGet("Professor/{id}")]
+		[SwaggerResponse(200)]
+		[SwaggerResponse(400)]
+		public ActionResult<Avaliacao> GetAvaliacoesPorIdProfessor(int idProfessor)
+		{
+			List<Avaliacao> avaliacoes = _avaliacaoService.GetAvaliacoesPorIdProfessor(idProfessor);
+
+			return Ok(avaliacoes);
+		}
+
+		// POST: Avaliacao/PostSimulado
+		[HttpPost("GerarSimulado")]
         [SwaggerOperation(Summary = "Obter um Simulado")]
         [SwaggerResponse(200)]
         [SwaggerResponse(400)]
-        public Avaliacao GerarSimulado(int turmaId)
+        public ActionResult<Avaliacao> GerarSimulado(int turmaId, int numeroQuestoes)
             
         {
-            var avaliacao = _avaliacaoService.GerarSimulado(turmaId);
+            var avaliacao = _avaliacaoService.GerarAvaliacao(turmaId, numeroQuestoes, TipoAvaliacao.Simulado);
 
-            return avaliacao;
+            return Ok(avaliacao);
         }
         
         // POST: Avaliacao/PostProva
-        [HttpPost]
+        [HttpPost("GerarProva")]
         [SwaggerOperation(Summary = "Obter uma Prova")]
         [SwaggerResponse(200)]
         [SwaggerResponse(400)]
-        public Avaliacao GerarProva(int turmaId)
+        public ActionResult<Avaliacao> GerarProva(int turmaId, int numeroQuestoes)
         {
-            var avaliacao = _avaliacaoService.GerarProva(turmaId);
+            var avaliacao = _avaliacaoService.GerarAvaliacao(turmaId, numeroQuestoes, TipoAvaliacao.Prova); ;
 
-            return avaliacao;
+            return Ok(avaliacao);
         }
 
     }

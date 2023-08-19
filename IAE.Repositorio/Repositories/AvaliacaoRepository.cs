@@ -11,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Dapper;
+using System.Collections;
 
 namespace IAE.Repository.Repositories
 {
@@ -52,6 +53,30 @@ namespace IAE.Repository.Repositories
                 connection.Execute(query, item);
                 return item;
             }
-        }
+		}
+
+		public List<Avaliacao> GetAvaliacoesPorIdTurma(int idTurma)
+		{
+			using (IDbConnection connection = new SQLiteConnection(_connectionString))
+			{
+				connection.Open();
+				var insertQuery = "SELECT * FROM Avaliacao WHERE IdTurma = @IdTurma";
+				var avaliacoes = connection.Query<Avaliacao>(insertQuery, new { IdTurma = idTurma }).AsList(); ;
+
+				return avaliacoes;
+			}
+		}
+
+		public List<Avaliacao> GetAvaliacoesPorIdProfessor(int idProfessor)
+		{
+			using (IDbConnection connection = new SQLiteConnection(_connectionString))
+			{
+				connection.Open();
+				var insertQuery = "SELECT * FROM Avaliacao WHERE IdProfessor = @IdProfessor";
+				var avaliacoes = connection.Query<Avaliacao>(insertQuery, new { IdProfessor = idProfessor }).AsList(); ;
+
+				return avaliacoes;
+			}
+		}
 	}
 }

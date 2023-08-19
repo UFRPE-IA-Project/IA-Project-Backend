@@ -9,7 +9,7 @@ using System.Net;
 namespace IAE.Web.Controllers
 {
     [ApiController]
-    [Route("[controller]/[action]")]
+    [Route("api/[controller]")]
     public class QuestaoController : ControllerBase
     {
         private readonly IQuestaoService _questaoService;
@@ -19,48 +19,63 @@ namespace IAE.Web.Controllers
             _questaoService = questaoService;
         }
 
-        // GET: Questao/ObterQuestao/[id]
-        [HttpGet(Name = "Questao")]
+        [HttpGet("{id}")]
         [SwaggerOperation(Summary = "Obter uma questão")]
         [SwaggerResponse(200)]
         [SwaggerResponse(400, "Id fornecido inválido")]
-        public Questao ObterQuestao(int id)
+        public ActionResult<Questao> ObterQuestao(int id)
         {
             var questao = _questaoService.ObterQuestao(id);
-            return questao;
+            return Ok(questao);
         }
 
-        // POST: Questao/AdicionarQuestao
         [HttpPost]
         [SwaggerOperation(Summary = "Adicionar uma questão")]
         [SwaggerResponse(200, "Questão adicionada.", typeof(Questao))]
         [SwaggerResponse(400, "Dado fornecido inválido")]
-        public ActionResult AdicionarQuestao(Questao questao)
+        public ActionResult<Questao> AdicionarQuestao(Questao questao)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
             _questaoService.AdicionarQuestao(questao);
+
             return Ok(questao);
         }
 
-        // PUT: Questao/AtualizarQuestao
-        [HttpPut]
+        [HttpPut("{id}")]
         [SwaggerOperation(Summary = "Atualizar uma questão")]
         [SwaggerResponse(200, "Questão atualizada.", typeof(Questao))]
         [SwaggerResponse(400, "Dado fornecido inválido")]
-        public ActionResult AtualizarQuestao(Questao questao)
+        public ActionResult<Questao> AtualizarQuestao(int id, Questao questao)
         {
-            _questaoService.AtualizarQuestao(questao);
-            return Ok(questao);
+			if (!ModelState.IsValid)
+			{
+				return BadRequest();
+			}
+
+			var questaoAtualizada = _questaoService.AtualizarQuestao(id, questao);
+
+            return Ok(questaoAtualizada);
         }
 
-        // POST: Questao/ApagarQuestao/5
-        [HttpPost]
+        [HttpDelete("{id}")]
         [SwaggerOperation(Summary = "Apagar uma questão a partir do id fornecido")]
         [SwaggerResponse(200, "Questão {idQuestao} apagada com sucesso.", typeof(Questao))]
         [SwaggerResponse(400, "Id fornecido inválido")]
         public ActionResult ApagarQuestao(int id)
         {
+            var questao = _questaoService.ObterQuestao(id);
+
+            if (questao is null)
+            {
+                return BadRequest();
+            }
+
             _questaoService.ApagarQuestao(id);
-            return Content($"Questão #{id} apagada com sucesso.");
+            return Ok($"Questão #{id} apagada com sucesso.");
         }
     }
 }

@@ -32,6 +32,8 @@ namespace IAE.Services.Services
         public Avaliacao GetAvaliacao(int id)
         {
             var avaliacao = _avaliacaoRepository.FindById(id);
+            ArgumentNullException.ThrowIfNull(avaliacao);
+
             return avaliacao;
         }
 
@@ -49,6 +51,7 @@ namespace IAE.Services.Services
         public Avaliacao AtualizarAvaliacao(int idAvaliacao, AvaliacaoDTO avaliacaoAtualizadaDto)
         {
             var avaliacao = _avaliacaoRepository.FindById(idAvaliacao);
+            ArgumentNullException.ThrowIfNull(avaliacao);
 
             avaliacao.TipoAvaliacao = avaliacaoAtualizadaDto.TipoAvaliacao;
             avaliacao.IdTurma = avaliacaoAtualizadaDto.IdTurma;
@@ -61,16 +64,15 @@ namespace IAE.Services.Services
         }
 
 
-        public Avaliacao GerarSimulado(int turmaId)
+        public Avaliacao GerarAvaliacao(int turmaId, int numeroQuestoes, TipoAvaliacao tipoAvaliacao)
         {
 
             Turma turma = _turmaService.BuscarTurmaPorId(turmaId);
-            IList<Questao> questoes = _questaoService.ObterQuestoes();
-            List<int> idsQuestoes = questoes.Select(q => q.Id ?? 0).ToList();
-
+            IList<Questao> questoes = ObterQuestoes(numeroQuestoes);
+            List<int> idsQuestoes = questoes.Select(q => q.Id!.Value).ToList();
 
             Avaliacao avaliacao = new Avaliacao();
-            avaliacao.TipoAvaliacao = TipoAvaliacao.Prova;
+            avaliacao.TipoAvaliacao = tipoAvaliacao;
             avaliacao.AlunosParticipantes = turma.Alunos;
             avaliacao.IdProfessor = turma.IdProfessor;
             avaliacao.IdsQuestoes = idsQuestoes;
@@ -78,23 +80,29 @@ namespace IAE.Services.Services
             _avaliacaoRepository.Insert(avaliacao);
 
             return avaliacao;
-        }
-        public Avaliacao GerarProva(int turmaId)
-        {
-            Turma turma = _turmaService.BuscarTurmaPorId(turmaId);
-            IList <Questao> questoes = _questaoService.ObterQuestoes();
-            List<int> idsQuestoes = questoes.Select(q => q.Id ?? 0).ToList();
+		}
 
+		public List<Avaliacao> GetAvaliacoesPorIdTurma(int idTurma)
+		{
+            var avaliacoes = _avaliacaoRepository.GetAvaliacoesPorIdTurma(idTurma);
+            ArgumentNullException.ThrowIfNull(avaliacoes);
 
-            Avaliacao avaliacao = new Avaliacao();
-            avaliacao.TipoAvaliacao = TipoAvaliacao.Prova;
-            avaliacao.AlunosParticipantes = turma.Alunos;
-            avaliacao.IdProfessor = turma.IdProfessor;
-            avaliacao.IdsQuestoes = idsQuestoes;
+            return avaliacoes;
+		}
 
-            _avaliacaoRepository.Insert(avaliacao);
+		public List<Avaliacao> GetAvaliacoesPorIdProfessor(int idProfessor)
+		{
+			var avaliacoes = _avaliacaoRepository.GetAvaliacoesPorIdProfessor(idProfessor);
+			ArgumentNullException.ThrowIfNull(avaliacoes);
 
-            return avaliacao;
-        }
-    }
+			return avaliacoes;
+		}
+
+		private List<Questao> ObterQuestoes(int numeroQuestoes)
+		{
+            //TODO: implementar filtro de questões por disciplina/turma/tema
+			var questoes = _questaoService.ObterQuestoesPorQuantidade(numeroQuestoes);
+            return questoes;
+		}
+	}
 }

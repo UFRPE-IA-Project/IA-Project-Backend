@@ -8,7 +8,7 @@ namespace IAE.Services.Interfaces
         List<Turma> BuscarTurmasPorUsuario(Usuario usuario);
         Turma BuscarTurmaPorId(int id);
         void AdicionarTurma(Turma turma);
-        void AtualizarTurma(Turma turma);
+        Turma? AtualizarTurma(int id, Turma turma);
         void ExcluirTurma(int id);
         List<Turma> ObterTodasTurmas();
     }

@@ -14,6 +14,7 @@ namespace IAE.Services.Services
     public class QuestaoService : IQuestaoService
     {
         private readonly IQuestaoRepository _questaoRepository;
+        private readonly Random _random = new Random();
 
         public QuestaoService(IQuestaoRepository questaoRepository)
         {
@@ -27,24 +28,25 @@ namespace IAE.Services.Services
             return questao;
         }
 
-        public void AdicionarQuestao(Questao questao)
+        public Questao AdicionarQuestao(Questao questao)
         {
             var questaoDb = _questaoRepository.Insert(questao);
+			ArgumentNullException.ThrowIfNull(questaoDb);
 
-            if (questaoDb is null)
-            {
-                throw new Exception("Não foi possível adicionar a questão");
-            }
-        }
+            return questaoDb;
+		}
 
-        public void AtualizarQuestao(Questao questao)
+		public Questao AtualizarQuestao(int id, Questao questao)
         {
-            var questaoDb = _questaoRepository.Update(questao);
 
-            if (questaoDb is null)
-            {
-                throw new Exception("Não foi possível atualizar a questão");
-            }
+            var questaoDb = ObterQuestao(id);
+            ArgumentNullException.ThrowIfNull(questaoDb);
+
+            questao.Id = questaoDb.Id;
+            var questaoAtualizada = _questaoRepository.Update(questao);
+			ArgumentNullException.ThrowIfNull(questaoAtualizada);
+
+			return questaoAtualizada;
         }
 
         public void ApagarQuestao(int id)
@@ -65,5 +67,24 @@ namespace IAE.Services.Services
             return questoes;
         }
 
-    }
+		public List<Questao> ObterQuestoesPorQuantidade(int numeroQuestoes)
+		{
+            var todasQuestoes = ObterQuestoes();
+			numeroQuestoes = Math.Min(numeroQuestoes, todasQuestoes.Count);
+
+			var questoesRemanecentes = new List<Questao>(todasQuestoes);
+            var questoesEscolhidas = new List<Questao>();
+
+			for (int i = 0; i < numeroQuestoes; i++)
+            {
+                var indiceQuestao = _random.Next(todasQuestoes.Count);
+				var questaoSelecionada = todasQuestoes[indiceQuestao];
+
+                questoesEscolhidas.Add(questaoSelecionada);
+				questoesRemanecentes.RemoveAt(indiceQuestao);
+			}
+
+            return questoesEscolhidas;
+		}
+	}
 }

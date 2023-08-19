@@ -14,7 +14,7 @@ namespace IAE.Services.Interfaces
 		List<Usuario> ObterTodosUsuarios();
 		List<Usuario> GetUsuarios(List<int> ids);
 		void ExcluirUsuario(int idUsuario);
-		Usuario AtualizarUsuario(int idUsuario, UsuarioDTO usuarioAtualizado);
+		Usuario AtualizarUsuario(int idUsuario, Usuario usuarioAtualizado);
 		Usuario AdicionarUsuario(UsuarioDTO usuario);
 	}
 }
