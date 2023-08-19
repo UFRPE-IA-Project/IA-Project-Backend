@@ -17,9 +17,9 @@ namespace IAE.Web.Controllers
 		}
 
 		[HttpGet("{id}")]
-		public ActionResult<PlanoEnsino> GetPlanoEnsino(int idPlanoEnsino)
+		public ActionResult<PlanoEnsino> GetPlanoEnsino(int id)
 		{
-			var planoEnsino = _planoEnsinoService.GetPlanoEnsino(idPlanoEnsino);
+			var planoEnsino = _planoEnsinoService.GetPlanoEnsino(id);
 
 			ArgumentNullException.ThrowIfNull(planoEnsino);
 
@@ -37,14 +37,14 @@ namespace IAE.Web.Controllers
 		}
 
 		[HttpPut("{id}")]
-		public ActionResult<PlanoEnsino> AtualizarPlanoEnsino(int idPlanoEnsino, PlanoEnsinoDTO planoEnsinoAtualizado)
+		public ActionResult<PlanoEnsino> AtualizarPlanoEnsino(int id, PlanoEnsinoDTO planoEnsinoAtualizado)
 		{
 			if (!ModelState.IsValid)
 			{
 				return BadRequest();
 			}
 
-			var planoEnsino = _planoEnsinoService.AtualizarPlanoEnsino(idPlanoEnsino, planoEnsinoAtualizado);
+			var planoEnsino = _planoEnsinoService.AtualizarPlanoEnsino(id, planoEnsinoAtualizado);
 
 			ArgumentNullException.ThrowIfNull(planoEnsino);
 
@@ -77,9 +77,9 @@ namespace IAE.Web.Controllers
 		}
 
 		[HttpDelete("{id}")]
-		public ActionResult ExcluirPlanoEnsino(int idPlanoEnsino)
+		public ActionResult ExcluirPlanoEnsino(int id)
 		{
-			_planoEnsinoService.ExcluirPlanoEnsino(idPlanoEnsino);
+			_planoEnsinoService.ExcluirPlanoEnsino(id);
 			return Content("Plano de Ensino excluído com sucesso.");
 		}
 	}

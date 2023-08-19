@@ -34,9 +34,9 @@ namespace IAE.Web.Controllers
 		[HttpGet("Turma/{id}")]
 		[SwaggerResponse(200)]
 		[SwaggerResponse(400)]
-		public ActionResult<Avaliacao> GetAvaliacoesPorIdTurma(int idTurma)
+		public ActionResult<Avaliacao> GetAvaliacoesPorIdTurma(int id)
 		{
-			List<Avaliacao> avaliacoes = _avaliacaoService.GetAvaliacoesPorIdTurma(idTurma);
+			List<Avaliacao> avaliacoes = _avaliacaoService.GetAvaliacoesPorIdTurma(id);
 
 			return Ok(avaliacoes);
 		}
@@ -44,9 +44,9 @@ namespace IAE.Web.Controllers
 		[HttpGet("Professor/{id}")]
 		[SwaggerResponse(200)]
 		[SwaggerResponse(400)]
-		public ActionResult<Avaliacao> GetAvaliacoesPorIdProfessor(int idProfessor)
+		public ActionResult<Avaliacao> GetAvaliacoesPorIdProfessor(int id)
 		{
-			List<Avaliacao> avaliacoes = _avaliacaoService.GetAvaliacoesPorIdProfessor(idProfessor);
+			List<Avaliacao> avaliacoes = _avaliacaoService.GetAvaliacoesPorIdProfessor(id);
 
 			return Ok(avaliacoes);
 		}

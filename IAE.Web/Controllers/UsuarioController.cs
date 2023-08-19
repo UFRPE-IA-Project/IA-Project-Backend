@@ -18,9 +18,9 @@ namespace IAE.Web.Controllers
 		}
 
 		[HttpGet("{id}")]
-		public ActionResult<Usuario> GetUsuario(int idUsuario)
+		public ActionResult<Usuario> GetUsuario(int id)
 		{
-			var usuario = _usuarioService.GetUsuario(idUsuario);
+			var usuario = _usuarioService.GetUsuario(id);
 
 			ArgumentNullException.ThrowIfNull(usuario);
 
@@ -48,14 +48,14 @@ namespace IAE.Web.Controllers
 		}
 
 		[HttpPut("{id}")]
-		public ActionResult<Usuario> AtualizarUsuario(int idUsuario, Usuario usuarioAtualizado)
+		public ActionResult<Usuario> AtualizarUsuario(int id, Usuario usuarioAtualizado)
 		{
 			if (!ModelState.IsValid)
 			{
 				return BadRequest();
 			}
 
-			var usuario = _usuarioService.AtualizarUsuario(idUsuario, usuarioAtualizado);
+			var usuario = _usuarioService.AtualizarUsuario(id, usuarioAtualizado);
 
 			ArgumentNullException.ThrowIfNull(usuario);
 
@@ -73,15 +73,15 @@ namespace IAE.Web.Controllers
 		}
 
 		[HttpDelete("{id}")]
-		public ActionResult ExcluirUsuario(int idUsuario)
+		public ActionResult ExcluirUsuario(int id)
 		{
-			var usuario = _usuarioService.GetUsuario(idUsuario);
+			var usuario = _usuarioService.GetUsuario(id);
 			if (usuario is null)
 			{
 				return NotFound("Usuário não existe.");	
 			}
 
-			_usuarioService.ExcluirUsuario(idUsuario);
+			_usuarioService.ExcluirUsuario(id);
 
 			return Ok("Usuario excluído com sucesso.");
 		}
