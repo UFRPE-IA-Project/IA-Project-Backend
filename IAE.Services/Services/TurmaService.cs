@@ -26,9 +26,16 @@ namespace IAE.Services.Services
         {
             _turmaRepository.Insert(turma);
         }
-        public void AtualizarTurma(Turma turma)
+        public Turma? AtualizarTurma(int id, Turma turma)
         {
-            _turmaRepository.Update(turma);
+			var existingTurma = BuscarTurmaPorId(id);
+            ArgumentNullException.ThrowIfNull(existingTurma);
+
+			turma.Id = id;
+
+			var turmaAtualizada = _turmaRepository.Update(turma);
+
+            return turmaAtualizada;
         }
         public void ExcluirTurma(int id)
         {

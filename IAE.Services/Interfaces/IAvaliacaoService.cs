@@ -10,9 +10,9 @@ namespace IAE.Services.Interfaces
         List<Avaliacao> ObterTodasAvaliacoes();
         void ExcluirAvaliacao(int idAvaliacao);
         Avaliacao AtualizarAvaliacao(int idAvaliacao, AvaliacaoDTO avaliacaoAtualizada);
-        public Avaliacao GerarSimulado(int turmaId);
-        public Avaliacao GerarProva(int turmaId);
-
-    }
+        public Avaliacao GerarAvaliacao(int turmaId, int numeroQuestoes, TipoAvaliacao tipoAvaliacao);
+		List<Avaliacao> GetAvaliacoesPorIdTurma(int idTurma);
+        List<Avaliacao> GetAvaliacoesPorIdProfessor(int idProfessor);
+	}
 
 }

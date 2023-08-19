@@ -7,14 +7,12 @@ using System.Threading.Tasks;
 
 namespace IAE.Services.Interfaces
 {
-
     public interface IQuestaoService
     {
         Questao ObterQuestao(int id);
-        void AdicionarQuestao(Questao questao);
+        Questao AdicionarQuestao(Questao questao);
         void ApagarQuestao(int id);
-        void AtualizarQuestao(Questao questao);
-        IList<Questao> ObterQuestoes();
-    }
-
+        Questao AtualizarQuestao(int id, Questao questao);
+		List<Questao> ObterQuestoesPorQuantidade(int numeroQuestoes);
+	}
 }

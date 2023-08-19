@@ -7,7 +7,7 @@ using System.Collections.Generic;
 namespace IAE.Web.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class TurmaController : ControllerBase
     {
         private readonly ITurmaService _turmaService;
@@ -37,22 +37,29 @@ namespace IAE.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult AdicionarTurma(Turma turma)
+        public ActionResult<Turma> AdicionarTurma(Turma turma)
         {
-            _turmaService.AdicionarTurma(turma);
+			if (!ModelState.IsValid)
+			{
+				return BadRequest();
+			}
+
+			_turmaService.AdicionarTurma(turma);
             return Ok("Turma adicionada com sucesso.");
         }
 
         [HttpPut("{id}")]
         public ActionResult AtualizarTurma(int id, Turma turma)
         {
-            var existingTurma = _turmaService.BuscarTurmaPorId(id);
-            if (existingTurma == null)
-            {
-                return NotFound();
-            }
-            turma.Id = id;
-            _turmaService.AtualizarTurma(turma);
+			if (!ModelState.IsValid)
+			{
+				return BadRequest();
+			}
+            			
+            var turmaAtualizada = _turmaService.AtualizarTurma(id, turma);
+
+            ArgumentNullException.ThrowIfNull(turmaAtualizada);
+
             return Ok("Turma atualizada com sucesso.");
         }
 

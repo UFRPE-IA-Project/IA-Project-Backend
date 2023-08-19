@@ -7,7 +7,7 @@ using Swashbuckle.AspNetCore.Annotations;
 namespace IAE.Web.Controllers
 {
 	[ApiController]
-	[Route("[controller]/[action]")]
+	[Route("api/[controller]")]
 	public class UsuarioController : ControllerBase
 	{
 		private readonly IUsuarioService _usuarioService;
@@ -17,28 +17,28 @@ namespace IAE.Web.Controllers
 			_usuarioService = usuarioService;
 		}
 
-		[HttpGet(Name = "Usuario")]
-		public Usuario GetUsuario(int idUsuario)
+		[HttpGet("{id}")]
+		public ActionResult<Usuario> GetUsuario(int id)
 		{
-			var usuario = _usuarioService.GetUsuario(idUsuario);
+			var usuario = _usuarioService.GetUsuario(id);
 
 			ArgumentNullException.ThrowIfNull(usuario);
 
-			return usuario;
+			return Ok(usuario);
 		}
 
 		[HttpGet]
-		public List<Usuario> ObterTodosUsuarios()
+		public ActionResult<List<Usuario>> ObterTodosUsuarios()
 		{
 			var usuarios = _usuarioService.ObterTodosUsuarios();
 
 			ArgumentNullException.ThrowIfNull(usuarios);
 
-			return usuarios;
+			return Ok(usuarios);
 		}
 
-		[HttpGet]
-		public List<Usuario> GetUsuarios(List<int>idsUsuarios)
+		[HttpPost("ObterPorIds")]
+		public ActionResult<List<Usuario>> GetUsuarios(List<int> idsUsuarios)
 		{
 			var usuarios = _usuarioService.GetUsuarios(idsUsuarios);
 
@@ -47,10 +47,15 @@ namespace IAE.Web.Controllers
 			return usuarios;
 		}
 
-		[HttpPost]
-		public ActionResult AtualizarUsuario(int idUsuario, UsuarioDTO usuarioAtualizado)
+		[HttpPut("{id}")]
+		public ActionResult<Usuario> AtualizarUsuario(int id, Usuario usuarioAtualizado)
 		{
-			var usuario = _usuarioService.AtualizarUsuario(idUsuario, usuarioAtualizado);
+			if (!ModelState.IsValid)
+			{
+				return BadRequest();
+			}
+
+			var usuario = _usuarioService.AtualizarUsuario(id, usuarioAtualizado);
 
 			ArgumentNullException.ThrowIfNull(usuario);
 
@@ -58,7 +63,7 @@ namespace IAE.Web.Controllers
 		}
 
 		[HttpPost]
-		public ActionResult AdicionarUsuario(UsuarioDTO usuario)
+		public ActionResult<Usuario> AdicionarUsuario(UsuarioDTO usuario)
 		{
 			var usuarioDb = _usuarioService.AdicionarUsuario(usuario);
 
@@ -67,12 +72,18 @@ namespace IAE.Web.Controllers
 			return Ok(usuarioDb);
 		}
 
-		[HttpDelete]
-		public ActionResult ExcluirUsuario(int idUsuario)
+		[HttpDelete("{id}")]
+		public ActionResult ExcluirUsuario(int id)
 		{
-			_usuarioService.ExcluirUsuario(idUsuario);
+			var usuario = _usuarioService.GetUsuario(id);
+			if (usuario is null)
+			{
+				return NotFound("Usuário não existe.");	
+			}
 
-			return Content("Usuario excluído com sucesso.");
+			_usuarioService.ExcluirUsuario(id);
+
+			return Ok("Usuario excluído com sucesso.");
 		}
 	}
 }

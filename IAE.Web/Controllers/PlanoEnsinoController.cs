@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace IAE.Web.Controllers
 {
 	[ApiController]
-	[Route("[controller]/[action]")]
+	[Route("api/[controller]")]
 	public class PlanoEnsinoController : ControllerBase
 	{
 		private readonly IPlanoEnsinoService _planoEnsinoService;
@@ -16,40 +16,35 @@ namespace IAE.Web.Controllers
 			_planoEnsinoService = planoEnsinoService;
 		}
 
-		[HttpGet(Name = "PlanoEnsino")]
-		public PlanoEnsino GetPlanoEnsino(int idPlanoEnsino)
+		[HttpGet("{id}")]
+		public ActionResult<PlanoEnsino> GetPlanoEnsino(int id)
 		{
-			var planoEnsino = _planoEnsinoService.GetPlanoEnsino(idPlanoEnsino);
+			var planoEnsino = _planoEnsinoService.GetPlanoEnsino(id);
 
 			ArgumentNullException.ThrowIfNull(planoEnsino);
 
-			return planoEnsino;
+			return Ok(planoEnsino);
 		}
 
 		[HttpGet]
-		public List<PlanoEnsino> ObterTodosPlanoEnsinos()
+		public ActionResult<List<PlanoEnsino>> ObterTodosPlanoEnsinos()
 		{
 			var planoEnsinos = _planoEnsinoService.ObterTodosPlanosEnsino();
 
 			ArgumentNullException.ThrowIfNull(planoEnsinos);
 
-			return planoEnsinos;
+			return Ok(planoEnsinos);
 		}
 
-		[HttpGet]
-		public List<PlanoEnsino> GetPlanoEnsinos(List<int> idsPlanoEnsinos)
+		[HttpPut("{id}")]
+		public ActionResult<PlanoEnsino> AtualizarPlanoEnsino(int id, PlanoEnsinoDTO planoEnsinoAtualizado)
 		{
-			var planoEnsinos = _planoEnsinoService.GetPlanosEnsino(idsPlanoEnsinos);
+			if (!ModelState.IsValid)
+			{
+				return BadRequest();
+			}
 
-			ArgumentNullException.ThrowIfNull(planoEnsinos);
-
-			return planoEnsinos;
-		}
-
-		[HttpPost]
-		public ActionResult AtualizarPlanoEnsino(int idPlanoEnsino, PlanoEnsinoDTO planoEnsinoAtualizado)
-		{
-			var planoEnsino = _planoEnsinoService.AtualizarPlanoEnsino(idPlanoEnsino, planoEnsinoAtualizado);
+			var planoEnsino = _planoEnsinoService.AtualizarPlanoEnsino(id, planoEnsinoAtualizado);
 
 			ArgumentNullException.ThrowIfNull(planoEnsino);
 
@@ -57,8 +52,13 @@ namespace IAE.Web.Controllers
 		}
 
 		[HttpPost]
-		public ActionResult AdicionarPlanoEnsino(PlanoEnsinoDTO planoEnsino)
+		public ActionResult<PlanoEnsino> AdicionarPlanoEnsino(PlanoEnsinoDTO planoEnsino)
 		{
+			if (!ModelState.IsValid)
+			{
+				return BadRequest();
+			}
+
 			var planoEnsinoDb = _planoEnsinoService.CriarPlanoEnsino(planoEnsino);
 
 			ArgumentNullException.ThrowIfNull(planoEnsinoDb);
@@ -66,10 +66,20 @@ namespace IAE.Web.Controllers
 			return Ok(planoEnsinoDb);
 		}
 
-		[HttpDelete]
-		public ActionResult ExcluirPlanoEnsino(int idPlanoEnsino)
+		[HttpPost("ObtePorIds")]
+		public ActionResult<List<PlanoEnsino>> GetPlanoEnsinos(List<int> idsPlanoEnsinos)
 		{
-			_planoEnsinoService.ExcluirPlanoEnsino(idPlanoEnsino);
+			var planoEnsinos = _planoEnsinoService.GetPlanosEnsino(idsPlanoEnsinos);
+
+			ArgumentNullException.ThrowIfNull(planoEnsinos);
+
+			return Ok(planoEnsinos);
+		}
+
+		[HttpDelete("{id}")]
+		public ActionResult ExcluirPlanoEnsino(int id)
+		{
+			_planoEnsinoService.ExcluirPlanoEnsino(id);
 			return Content("Plano de Ensino excluído com sucesso.");
 		}
 	}

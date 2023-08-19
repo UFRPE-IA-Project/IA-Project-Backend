@@ -22,15 +22,12 @@ namespace IAE.Services.Services
 
 		}
 
-        public Usuario AtualizarUsuario(int idUsuario, UsuarioDTO usuarioAtualizadoDto)
+        public Usuario AtualizarUsuario(int idUsuario, Usuario usuarioAtualizadoDto)
 		{
-			var usuario = _usuarioRepository.FindById(idUsuario);
+			var usuario = GetUsuario(idUsuario);
+			ArgumentNullException.ThrowIfNull(usuario);
 
-			usuario.Nome = usuarioAtualizadoDto.Nome;
-			usuario.Sobrenome = usuarioAtualizadoDto.Sobrenome;
-			usuario.Email = usuarioAtualizadoDto.Email;
-			usuario.Telefone = usuarioAtualizadoDto.Telefone;
-			usuario.TipoUsuario = usuarioAtualizadoDto.TipoUsuario;
+			usuario.Id = usuarioAtualizadoDto.Id;
 
 			var usuarioBD = _usuarioRepository.Update(usuario);
 
@@ -77,10 +74,7 @@ namespace IAE.Services.Services
 			var novoUsuario = CriarNovoUsuarioPeloDto(usuarioDto);
 			var usuarioDb = _usuarioRepository.Insert(novoUsuario);
 
-			if (usuarioDb is null)
-			{
-				throw new Exception("Não foi possível adicionar o novo usuario");
-			}
+			ArgumentNullException.ThrowIfNull(usuarioDb);
 
 			return usuarioDb;
 		}
