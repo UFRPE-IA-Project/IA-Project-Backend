@@ -2,6 +2,7 @@
 using IAE.Entities.Entities;
 using IAE.Entities.Enumarations;
 using IAE.Services.Interfaces;
+using IAE.Entities.DTO;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.JsonPatch.Operations;
 using Microsoft.AspNetCore.Mvc;
@@ -74,6 +75,28 @@ namespace IAE.Web.Controllers
             var avaliacao = _avaliacaoService.GerarAvaliacao(turmaId, numeroQuestoes, TipoAvaliacao.Prova); ;
 
             return Ok(avaliacao);
+        }
+
+        // PUT: api/Avaliacao/AtualizarAvaliacao
+        [HttpPut("AtualizarAvaliacao")]
+        [SwaggerOperation(Summary = "Atualizar uma Avaliacao")]
+        [SwaggerResponse(200)]
+        [SwaggerResponse(400)]
+        public ActionResult<Avaliacao> AtualizarAvaliacao(int idAvaliacao, AvaliacaoDTO avaliacaoAtualizada)
+        {
+            var avaliacaoAtualizadaRetorno = _avaliacaoService.AtualizarAvaliacao(idAvaliacao, avaliacaoAtualizada);
+            return Ok(avaliacaoAtualizadaRetorno);
+        }
+
+        // DELETE: api/Avaliacao/ExcluirAvaliacao/{id}
+        [HttpDelete("ExcluirAvaliacao/{id}")]
+        [SwaggerOperation(Summary = "Excluir uma Avaliacao")]
+        [SwaggerResponse(200)]
+        [SwaggerResponse(400)]
+        public ActionResult ExcluirAvaliacao(int id)
+        {
+            _avaliacaoService.ExcluirAvaliacao(id);
+            return Ok();
         }
 
     }
