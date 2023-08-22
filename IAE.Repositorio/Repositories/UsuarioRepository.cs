@@ -48,7 +48,7 @@ namespace IAE.Repository.Repositories
 			}
 		}
 
-		public override int Insert(IList<Usuario> items)
+		public int Insert(IList<Usuario> items)
 		{
 			int linhasAfetadas = 0;
 			using (IDbConnection connection = new SQLiteConnection(_connectionString))

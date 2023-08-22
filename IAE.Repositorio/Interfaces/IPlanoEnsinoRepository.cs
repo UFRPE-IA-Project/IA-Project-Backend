@@ -7,7 +7,9 @@ using System.Threading.Tasks;
 
 namespace IAE.Repository.Interfaces
 {
-	public interface IPlanoEnsinoRepository : IBaseRepository<PlanoEnsino>
-	{
-	}
+    public interface IPlanoEnsinoRepository : IBaseRepository<PlanoEnsino>
+    {
+        int Insert(IList<PlanoEnsino> planosEnsino);
+
+    }
 }

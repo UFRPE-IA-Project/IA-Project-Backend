@@ -706,6 +706,72 @@
         }
       }
     },
+    "/api/Questao/{id}/verificar-alternativa": {
+      "post": {
+        "tags": [
+          "Questao"
+        ],
+        "summary": "Verificar se a alternativa escolhida é correta",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "integer",
+                "format": "int32"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "integer",
+                "format": "int32"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Resposta da alternativa",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "boolean"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Dados fornecidos inválidos"
+          }
+        }
+      }
+    },
     "/api/Turma/{id}": {
       "get": {
         "tags": [
@@ -1401,19 +1467,25 @@
             "type": "string",
             "nullable": true
           },
-          "respostas": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Resposta"
-            },
+          "alt1": {
+            "type": "string",
             "nullable": true
           },
-          "tags": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
+          "alt2": {
+            "type": "string",
             "nullable": true
+          },
+          "alt3": {
+            "type": "string",
+            "nullable": true
+          },
+          "alt4": {
+            "type": "string",
+            "nullable": true
+          },
+          "alternativaCorreta": {
+            "type": "integer",
+            "format": "int32"
           }
         },
         "additionalProperties": false
@@ -1435,24 +1507,6 @@
             "items": {
               "$ref": "#/components/schemas/PlanoEnsino"
             },
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "Resposta": {
-        "type": "object",
-        "properties": {
-          "enunciadoResposta": {
-            "type": "string",
-            "nullable": true
-          },
-          "isRespostaCorreta": {
-            "type": "boolean"
-          },
-          "idQuestao": {
-            "type": "integer",
-            "format": "int32",
             "nullable": true
           }
         },

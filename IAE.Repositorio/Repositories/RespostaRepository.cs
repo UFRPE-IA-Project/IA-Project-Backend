@@ -20,7 +20,7 @@ namespace IAE.Repository.Repositories
 			throw new NotImplementedException();
 		}
 
-		public override int Insert(IList<Resposta> items)
+		public int Insert(IList<Resposta> items)
 		{
 			throw new NotImplementedException();
 		}

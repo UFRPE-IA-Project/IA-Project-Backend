@@ -77,5 +77,23 @@ namespace IAE.Web.Controllers
             _questaoService.ApagarQuestao(id);
             return Ok($"Questão #{id} apagada com sucesso.");
         }
+
+        [HttpPost("{id}/verificar-alternativa")]
+        [SwaggerOperation(Summary = "Verificar se a alternativa escolhida é correta")]
+        [SwaggerResponse(200, "Resposta da alternativa", typeof(bool))]
+        [SwaggerResponse(400, "Dados fornecidos inválidos")]
+        public ActionResult<bool> VerificarAlternativa(int id, [FromBody] int alternativaEscolhida)
+        {
+            try
+            {
+                var correta = _questaoService.VerificarAlternativaCorreta(id, alternativaEscolhida);
+                return Ok(correta);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
     }
 }

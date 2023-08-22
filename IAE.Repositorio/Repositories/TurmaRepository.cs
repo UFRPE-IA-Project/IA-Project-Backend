@@ -34,7 +34,7 @@ namespace IAE.Repository.Repositories
             }
         }
 
-		public override int Insert(IList<Turma> items)
+		public int Insert(IList<Turma> items)
 		{
             using (IDbConnection connection = new SQLiteConnection(_connectionString))
             {

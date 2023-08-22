@@ -47,7 +47,7 @@ namespace IAE.Repository.Repositories
 			}
 		}
 
-		public override int Insert(IList<PlanoEnsino> items)
+		public int Insert(IList<PlanoEnsino> items)
 		{
 			int linhasAfetadas = 0;
 			using (IDbConnection connection = new SQLiteConnection(_connectionString))

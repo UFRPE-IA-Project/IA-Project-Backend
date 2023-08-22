@@ -20,34 +20,35 @@ namespace IAE.Repository.Repositories
 
         public override Questao Insert(Questao item)
         {
-            using (IDbConnection connection = new SQLiteConnection(_connectionString))
+            using (IDbConnection connection = CreateConnection())
             {
                 connection.Open();
-                string query = "INSERT INTO Questao (Enunciado, AvaliacaoId) VALUES (@Enunciado, @AvaliacaoId);";
-                connection.Execute(query, item);
-                return item;
-            }
-        }
 
-        public override int Insert(IList<Questao> items)
-        {
-            using (IDbConnection connection = new SQLiteConnection(_connectionString))
-            {
-                connection.Open();
-                string query = "INSERT INTO Questao (Enunciado, AvaliacaoId) VALUES (@Enunciado, @AvaliacaoId);";
-                return connection.Execute(query, items);
+                // Insere a questão e seus atributos
+                string insertQuery = "INSERT INTO Questao (Enunciado, Alt1, Alt2, Alt3, Alt4, AlternativaCorreta) VALUES (@Enunciado, @Alt1, @Alt2, @Alt3, @Alt4, @AlternativaCorreta);";
+                connection.Execute(insertQuery, item);
+
+                return item;
             }
         }
 
         public override Questao Update(Questao item)
         {
-            using (IDbConnection connection = new SQLiteConnection(_connectionString))
+            using (IDbConnection connection = CreateConnection())
             {
                 connection.Open();
-                string query = "UPDATE Questao SET Enunciado = @Enunciado, AvaliacaoId = @AvaliacaoId WHERE Id = @Id;";
-                connection.Execute(query, item);
+
+                // Atualiza a questão e seus atributos
+                string updateQuery = "UPDATE Questao SET Enunciado = @Enunciado, Alt1 = @Alt1, Alt2 = @Alt2, Alt3 = @Alt3, Alt4 = @Alt4, AlternativaCorreta = @AlternativaCorreta WHERE Id = @Id;";
+                connection.Execute(updateQuery, item);
+
                 return item;
             }
+        }
+
+        private IDbConnection CreateConnection()
+        {
+            return new SQLiteConnection(_connectionString);
         }
     }
 
