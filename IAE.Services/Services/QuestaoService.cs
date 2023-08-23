@@ -1,4 +1,5 @@
 ﻿using IAE.Entidades.Entidades;
+using IAE.Entities.Entities;
 using IAE.Repository.Interfaces;
 using IAE.Services.Interfaces;
 using System;
@@ -24,7 +25,7 @@ namespace IAE.Services.Services
         public Questao ObterQuestao(int id)
         {
             var questao = _questaoRepository.FindById(id);
-
+            ArgumentNullException.ThrowIfNull(questao);
             return questao;
         }
 
