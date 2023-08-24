@@ -10,5 +10,6 @@ namespace IAE.Entidades.Entidades
         public string Alt3 { get; set; } = string.Empty;
         public string Alt4 { get; set; } = string.Empty;
         public int AlternativaCorreta { get; set; }
+        public int id_PlanoEnsino { get; set; }
     }
 }

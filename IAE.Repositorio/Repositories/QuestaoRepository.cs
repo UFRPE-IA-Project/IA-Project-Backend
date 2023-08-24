@@ -25,7 +25,7 @@ namespace IAE.Repository.Repositories
                 connection.Open();
 
                 // Insere a questão e seus atributos
-                string insertQuery = "INSERT INTO Questao (Enunciado, Alt1, Alt2, Alt3, Alt4, AlternativaCorreta) VALUES (@Enunciado, @Alt1, @Alt2, @Alt3, @Alt4, @AlternativaCorreta);";
+                string insertQuery = "INSERT INTO Questao (Enunciado, Alt1, Alt2, Alt3, Alt4, AlternativaCorreta, id_PlanoEnsino) VALUES (@Enunciado, @Alt1, @Alt2, @Alt3, @Alt4, @AlternativaCorreta, @id_PlanoEnsino);";
                 connection.Execute(insertQuery, item);
 
                 return item;
