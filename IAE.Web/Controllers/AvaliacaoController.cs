@@ -52,27 +52,15 @@ namespace IAE.Web.Controllers
 			return Ok(avaliacoes);
 		}
 
-		// POST: Avaliacao/PostSimulado
-		[HttpPost("GerarSimulado")]
-        [SwaggerOperation(Summary = "Obter um Simulado")]
-        [SwaggerResponse(200)]
-        [SwaggerResponse(400)]
-        public ActionResult<Avaliacao> GerarSimulado(int turmaId, int numeroQuestoes)
-            
-        {
-            var avaliacao = _avaliacaoService.GerarAvaliacao(turmaId, numeroQuestoes, TipoAvaliacao.Simulado);
-
-            return Ok(avaliacao);
-        }
         
-        // POST: Avaliacao/PostProva
-        [HttpPost("GerarProva")]
+        // POST: Avaliacao
+        [HttpPost]
         [SwaggerOperation(Summary = "Obter uma Prova")]
         [SwaggerResponse(200)]
         [SwaggerResponse(400)]
-        public ActionResult<Avaliacao> GerarProva(int turmaId, int numeroQuestoes)
+        public ActionResult<Avaliacao> GerarAvaliacao(int turmaId, int numeroQuestoes, TipoAvaliacao tipoAvaliacao)
         {
-            var avaliacao = _avaliacaoService.GerarAvaliacao(turmaId, numeroQuestoes, TipoAvaliacao.Prova); ;
+            var avaliacao = _avaliacaoService.GerarAvaliacao(turmaId, numeroQuestoes, tipoAvaliacao); ;
 
             return Ok(avaliacao);
         }
