@@ -1600,6 +1600,10 @@
           "alternativaCorreta": {
             "type": "integer",
             "format": "int32"
+          },
+          "id_PlanoEnsino": {
+            "type": "integer",
+            "format": "int32"
           }
         },
         "additionalProperties": false

@@ -1,4 +1,5 @@
 ﻿using IAE.Entidades.Entidades;
+using IAE.Entities.Entities;
 using IAE.Repository.Interfaces;
 using IAE.Services.Interfaces;
 using System;
@@ -24,7 +25,7 @@ namespace IAE.Services.Services
         public Questao ObterQuestao(int id)
         {
             var questao = _questaoRepository.FindById(id);
-
+            ArgumentNullException.ThrowIfNull(questao);
             return questao;
         }
 
@@ -53,7 +54,7 @@ namespace IAE.Services.Services
         {
             var qtdDeletada = _questaoRepository.Delete(id);
 
-            if (qtdDeletada != -1)
+            if (qtdDeletada < 1)
             {
                 throw new Exception("Não foi possível apagar a questão");
             }
