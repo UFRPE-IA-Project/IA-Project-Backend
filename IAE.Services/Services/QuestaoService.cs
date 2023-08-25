@@ -99,5 +99,24 @@ namespace IAE.Services.Services
 
             return questao.AlternativaCorreta == alternativaEscolhida;
         }
+
+        public List<Questao> ObterQuestaoPorPlanoEnsino(int idPlanoEnsino)
+        {
+            var questoes = _questaoRepository.FindAll();
+            var questoesDoPlano = new List<Questao>();
+
+            foreach (var questao in questoes)
+            {
+                if (questao.id_PlanoEnsino == idPlanoEnsino)
+                {
+                    questoesDoPlano.Add(questao);
+                }
+            }
+
+            return questoesDoPlano;
+
+        }
+
+
     }
 }

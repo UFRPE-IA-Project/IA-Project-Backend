@@ -134,58 +134,7 @@
         }
       }
     },
-    "/api/Avaliacao/GerarSimulado": {
-      "post": {
-        "tags": [
-          "Avaliacao"
-        ],
-        "summary": "Obter um Simulado",
-        "parameters": [
-          {
-            "name": "turmaId",
-            "in": "query",
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "name": "numeroQuestoes",
-            "in": "query",
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/Avaliacao"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Avaliacao"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Avaliacao"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request"
-          }
-        }
-      }
-    },
-    "/api/Avaliacao/GerarProva": {
+    "/api/Avaliacao/Avaliacao": {
       "post": {
         "tags": [
           "Avaliacao"
@@ -206,6 +155,13 @@
             "schema": {
               "type": "integer",
               "format": "int32"
+            }
+          },
+          {
+            "name": "tipoAvaliacao",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/TipoAvaliacao"
             }
           }
         ],
@@ -857,6 +813,46 @@
           },
           "400": {
             "description": "Dados fornecidos inválidos"
+          }
+        }
+      }
+    },
+    "/api/Questao/obterPorPlanoEnsino/{idPlanoEnsino}": {
+      "get": {
+        "tags": [
+          "Questao"
+        ],
+        "parameters": [
+          {
+            "name": "idPlanoEnsino",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Questao"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Questao"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Questao"
+                }
+              }
+            }
           }
         }
       }

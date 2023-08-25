@@ -68,7 +68,7 @@ namespace IAE.Services.Services
         {
 
             Turma turma = _turmaService.BuscarTurmaPorId(turmaId);
-            IList<Questao> questoes = ObterQuestoes(numeroQuestoes);
+            IList<Questao> questoes = _questaoService.ObterQuestaoPorPlanoEnsino(turma.IdPlanoEnsino);
             List<int> idsQuestoes = questoes.Select(q => q.Id!.Value).ToList();
 
             Avaliacao avaliacao = new Avaliacao();

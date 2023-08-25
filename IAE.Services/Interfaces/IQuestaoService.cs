@@ -16,5 +16,7 @@ namespace IAE.Services.Interfaces
 		List<Questao> ObterQuestoesPorQuantidade(int numeroQuestoes);
         bool VerificarAlternativaCorreta(int questaoId, int alternativaEscolhida);
 
+        List<Questao> ObterQuestaoPorPlanoEnsino(int idPlanoEnsino);
+
     }
 }
