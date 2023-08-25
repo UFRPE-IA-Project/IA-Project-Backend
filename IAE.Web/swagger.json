@@ -861,6 +861,46 @@
         }
       }
     },
+    "/api/Questao/obterPorPlanoEnsino/{idPlanoEnsino}": {
+      "get": {
+        "tags": [
+          "Questao"
+        ],
+        "parameters": [
+          {
+            "name": "idPlanoEnsino",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Questao"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Questao"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Questao"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Turma/{id}": {
       "get": {
         "tags": [

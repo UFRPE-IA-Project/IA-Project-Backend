@@ -95,5 +95,20 @@ namespace IAE.Web.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("obterPorPlanoEnsino/{idPlanoEnsino}")]
+        public ActionResult<Questao> ObterQuestaoPorPlanoEnsino(int idPlanoEnsino)
+        {
+            try
+            {
+                var questoes = _questaoService.ObterQuestaoPorPlanoEnsino(idPlanoEnsino);
+                return Ok(questoes);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
     }
 }
