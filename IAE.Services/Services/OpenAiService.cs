@@ -52,7 +52,14 @@ namespace IAE.Services.Services
 
 		public string GetLastChave()
 		{
-			throw new NotImplementedException();
+			var chave = _openAiRepository.GetLastChave();
+
+			if (string.IsNullOrEmpty(chave))
+			{
+				throw new ArgumentException("Houve algum erro ao recuperar a ultima chave adicionada.");
+			}
+
+			return chave;
 		}
 
 		public void UpdateChave(int id, string chave)

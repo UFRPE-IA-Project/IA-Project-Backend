@@ -9,5 +9,6 @@ namespace IAE.Repository.Interfaces
 {
 	public interface IOpenAiRepository : IBaseRepository<ChaveOpenAI>
 	{
+		string GetLastChave();
 	}
 }

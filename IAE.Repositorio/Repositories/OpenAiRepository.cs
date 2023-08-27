@@ -96,7 +96,7 @@ namespace IAE.Repository.Repositories
 
 					var chaveDb = FindById(idChave);
 
-					if (chaveDb is null || !string.IsNullOrEmpty(chaveDb.Chave))
+					if (chaveDb is null || string.IsNullOrEmpty(chaveDb.Chave))
 					{
 						throw new ArgumentException("ChaveDb é nula, ou chave é nula ou vazia.");
 					}
