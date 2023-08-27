@@ -15,6 +15,7 @@ namespace IAE.Web.Utils
             builder.Services.AddScoped<IAvaliacaoService, AvaliacaoService>();
             builder.Services.AddScoped<IUsuarioService, UsuarioService>();
             builder.Services.AddScoped<IPlanoEnsinoService, PlanoEnsinoService>();
+            builder.Services.AddScoped<IOpenAiService, OpenAiService>();
 
 			return builder;
 		}
@@ -27,6 +28,7 @@ namespace IAE.Web.Utils
             builder.Services.AddScoped<IAvaliacaoRepository, AvaliacaoRepository>();
             builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
             builder.Services.AddScoped<IPlanoEnsinoRepository, PlanoEnsinoRepository>();
+            builder.Services.AddScoped<IOpenAiRepository, OpenAiRepository>();
 
 			return builder;
 		}
