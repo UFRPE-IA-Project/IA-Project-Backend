@@ -105,7 +105,7 @@ namespace IAE.Repository.Repositories
 				}
 				catch (Exception ex)
 				{
-					throw new ArgumentException($"Houve algum problema atualizar a chave de acesso. Erro: {ex.Message}");
+					throw new ArgumentException($"Houve algum problema atualizar a chave de acesso. Erro: {ex.Message}.");
 				}
 			}
 		}
