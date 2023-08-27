@@ -18,7 +18,7 @@ namespace IAE.Repository.Repositories
 		{
 		}
 
-		public override Usuario Insert(Usuario item)
+		public override Usuario Insert(Usuario usuario)
 		{
 			using (IDbConnection connection = new SQLiteConnection(_connectionString))
 			{
@@ -31,7 +31,7 @@ namespace IAE.Repository.Repositories
 								 "VALUES (@Nome, @Sobrenome, @Telefone, @TipoUsuario, @Email); " +
 								 "SELECT last_insert_rowid();";
 
-						var idUsuario = connection.ExecuteScalar<int>(insertQuery, item, transaction);
+						var idUsuario = connection.ExecuteScalar<int>(insertQuery, usuario, transaction);
 
 						transaction.Commit();
 
@@ -48,7 +48,7 @@ namespace IAE.Repository.Repositories
 			}
 		}
 
-		public int Insert(IList<Usuario> items)
+		public int Insert(IList<Usuario> usuarios)
 		{
 			int linhasAfetadas = 0;
 			using (IDbConnection connection = new SQLiteConnection(_connectionString))
@@ -61,7 +61,7 @@ namespace IAE.Repository.Repositories
 						string insertQuery = "INSERT INTO Usuario (Nome, Sobrenome, Telefone, TipoUsuario, Email) " +
 								 "VALUES (@Nome, @Sobrenome, @Telefone, @TipoUsuario, @Email)";
 
-						linhasAfetadas = connection.Execute(insertQuery, items);
+						linhasAfetadas = connection.Execute(insertQuery, usuarios);
 						transaction.Commit();
 					}
 					catch (Exception ex)
