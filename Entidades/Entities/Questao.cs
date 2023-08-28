@@ -1,6 +1,6 @@
 ﻿using IAE.Entities.Entities;
 
-namespace IAE.Entidades.Entidades
+namespace IAE.Entities.Entities
 {
     public class Questao : BaseEntity
     {

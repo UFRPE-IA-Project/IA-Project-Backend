@@ -1,4 +1,4 @@
-﻿using IAE.Entidades.Entidades;
+﻿using IAE.Entities.Entities;
 using IAE.Entities.Entities;
 using IAE.Repository.Interfaces;
 

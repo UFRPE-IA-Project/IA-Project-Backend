@@ -1,13 +1,6 @@
-﻿using IAE.Entidades.Entidades;
-using IAE.Entities.Entities;
+﻿using IAE.Entities.Entities;
 using IAE.Repository.Interfaces;
 using IAE.Services.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IAE.Services.Services
 {
@@ -31,6 +24,13 @@ namespace IAE.Services.Services
 
         public Questao AdicionarQuestao(Questao questao)
         {
+            if (string.IsNullOrWhiteSpace(questao.Enunciado))
+            {
+                throw new ArgumentNullException("Questão parece estar vazia ou nula");
+            }
+
+            ManipularStringRecebidaSeparandoPropriedades(questao.Enunciado, questao);
+
             var questaoDb = _questaoRepository.Insert(questao);
 			ArgumentNullException.ThrowIfNull(questaoDb);
 
@@ -52,13 +52,14 @@ namespace IAE.Services.Services
 
         public void ApagarQuestao(int id)
         {
-            var qtdDeletada = _questaoRepository.Delete(id);
+            var questao = _questaoRepository.FindById(id);
 
-            if (qtdDeletada < 1)
+            if (questao is null)
             {
-                throw new Exception("Não foi possível apagar a questão");
+                throw new ArgumentNullException("Não foi possível apagar a questão, ela não existe no banco de dados ou já foi deletada");
             }
 
+             _questaoRepository.Delete(id);
         }
 
         public IList<Questao> ObterQuestoes(){
@@ -117,6 +118,47 @@ namespace IAE.Services.Services
 
         }
 
+        private void ManipularStringRecebidaSeparandoPropriedades(string stringRecebida, Questao questao)
+        {
+            string[] linhas = stringRecebida.Split('\n');
+            questao.AlternativaCorreta = 1;
 
+            for (int i = 0; i < linhas.Length; i++)
+            {
+                string linha = linhas[i].Trim();
+                int indiceDoisPontos = linha.IndexOf(':');
+
+                if (indiceDoisPontos != -1 && indiceDoisPontos != 0)
+                {
+                    string nomePropriedade = linha.Substring(0, indiceDoisPontos).Trim();
+                    string valorPropriedade = linha.Substring(indiceDoisPontos + 1).Trim();
+
+                    switch (nomePropriedade)
+                    {
+                        case "ENUNCIADO":
+                            questao.Enunciado = valorPropriedade;
+                            break;
+                        case "RESPOSTA 1":
+                            questao.Alt1 = valorPropriedade;
+                            break;
+                        case "RESPOSTA 2":
+                            questao.Alt2 = valorPropriedade;
+                            break;
+                        case "RESPOSTA 3":
+                            questao.Alt3 = valorPropriedade;
+                            break;
+                        case "RESPOSTA 4":
+                            questao.Alt4 = valorPropriedade;
+                            break;
+                        default:
+                            throw new ArgumentException($"A palavra '{nomePropriedade}' não faz parte da estrutura esperada de uma questão");
+                    }
+                }
+                else
+                {
+                    throw new ArgumentException("O texto recebido não parece estar estruturado de maneira esperada.");
+                }
+            }
+        }
     }
 }

@@ -1,4 +1,4 @@
-﻿using IAE.Entidades.Entidades;
+﻿using IAE.Entities.Entities;
 using IAE.Entities.Enumarations;
 using System;
 using System.Collections.Generic;
