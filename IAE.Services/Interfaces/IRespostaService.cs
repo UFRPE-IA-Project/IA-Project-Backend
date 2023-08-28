@@ -1,4 +1,4 @@
-using IAE.Entidades.Entidades;
+using IAE.Entities.Entities;
 
 namespace IAE.Services.Interfaces
 {

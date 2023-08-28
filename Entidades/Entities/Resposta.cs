@@ -1,4 +1,4 @@
-﻿namespace IAE.Entidades.Entidades
+﻿namespace IAE.Entities.Entities
 {
 	public class Resposta
 	{
