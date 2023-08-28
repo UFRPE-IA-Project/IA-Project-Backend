@@ -396,3 +396,5 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+/IAE.Testes
+/Entidades/Entities/Usuario.cs
