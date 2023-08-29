@@ -941,6 +941,58 @@
         }
       }
     },
+    "/api/Questao/AdicionarMultiplasQuestoes": {
+      "post": {
+        "tags": [
+          "Questao"
+        ],
+        "summary": "Adicionar várias questões",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Questao"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Questao"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Questao"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Questoes adicionadas.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Questao"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Questao"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Questao"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Dado fornecido inválido"
+          }
+        }
+      }
+    },
     "/api/Questao/{id}/verificar-alternativa": {
       "post": {
         "tags": [

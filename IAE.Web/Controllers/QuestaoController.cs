@@ -45,6 +45,22 @@ namespace IAE.Web.Controllers
             return Ok(questao);
         }
 
+        [HttpPost("AdicionarMultiplasQuestoes")]
+        [SwaggerOperation(Summary = "Adicionar várias questões")]
+        [SwaggerResponse(200, "Questoes adicionadas.", typeof(Questao))]
+        [SwaggerResponse(400, "Dado fornecido inválido")]
+        public ActionResult<Questao> AdicionarMultiplasQuestoes(Questao questoes)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            _questaoService.AdicionarMultiplasQuestoes(questoes);
+
+            return Ok("Questoes adicionadas.");
+        }
+
         [HttpPut("{id}")]
         [SwaggerOperation(Summary = "Atualizar uma questão")]
         [SwaggerResponse(200, "Questão atualizada.", typeof(Questao))]
