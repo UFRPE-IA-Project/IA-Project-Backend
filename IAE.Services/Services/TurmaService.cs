@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using IAE.Entities.DTO;
 using IAE.Entities.Entities;
 using IAE.Repository.Interfaces;
 using IAE.Services.Interfaces;
@@ -44,6 +45,19 @@ namespace IAE.Services.Services
         public List<Turma> ObterTodasTurmas()
         {
             return _turmaRepository.FindAll().ToList();
+        }
+
+        public Turma CriarNovaTurmaPeloDto(TurmaDTO dto)
+        {
+            var novaTurma = new Turma()
+            {
+                CodigoTurma = dto.CodigoTurma,
+                IdPlanoEnsino = dto.PlanoEnsinoId,
+                IdProfessor = dto.ProfessorId
+
+            };
+
+            return novaTurma;
         }
 
     }
