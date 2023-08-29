@@ -1,3 +1,4 @@
+using IAE.Entities.DTO;
 using IAE.Entities.Entities;
 using System.Collections.Generic;
 
@@ -11,5 +12,6 @@ namespace IAE.Services.Interfaces
         Turma? AtualizarTurma(int id, Turma turma);
         void ExcluirTurma(int id);
         List<Turma> ObterTodasTurmas();
+        Turma CriarNovaTurmaPeloDto(TurmaDTO dto);
     }
 }
