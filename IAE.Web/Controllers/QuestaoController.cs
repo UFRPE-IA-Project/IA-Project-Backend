@@ -112,7 +112,7 @@ namespace IAE.Web.Controllers
         }
 
         [HttpGet]
-        [Route("obterPorPlanoEnsino/{idPlanoEnsino}")]
+        [Route("ObterPorPlanoEnsino/{idPlanoEnsino}")]
         public ActionResult<Questao> ObterQuestaoPorPlanoEnsino(int idPlanoEnsino)
         {
             try

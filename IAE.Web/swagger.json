@@ -1059,7 +1059,7 @@
         }
       }
     },
-    "/api/Questao/obterPorPlanoEnsino/{idPlanoEnsino}": {
+    "/api/Questao/ObterPorPlanoEnsino/{idPlanoEnsino}": {
       "get": {
         "tags": [
           "Questao"
