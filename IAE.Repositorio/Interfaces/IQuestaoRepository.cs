@@ -10,5 +10,7 @@ namespace IAE.Repository.Interfaces
 {
 	public interface IQuestaoRepository : IBaseRepository<Questao>
 	{
-	}
+        int Insert(IList<Questao> questoes);
+
+    }
 }
