@@ -155,7 +155,9 @@ namespace IAE.Services.Services
 
         private void ManipularStringRecebidaSeparandoPropriedades(string stringRecebida, Questao questao)
         {
-            string[] linhas = stringRecebida.Split('\n');
+            stringRecebida = RemoverTextoInicial(stringRecebida);
+            
+            string[] linhas = stringRecebida.Split('\n', StringSplitOptions.RemoveEmptyEntries);
             questao.AlternativaCorreta = 1;
 
             for (int i = 0; i < linhas.Length; i++)
@@ -193,6 +195,20 @@ namespace IAE.Services.Services
                 {
                     throw new ArgumentException("O texto recebido não parece estar estruturado de maneira esperada.");
                 }
+            }
+        }
+
+        private string RemoverTextoInicial(string texto)
+        {
+            int enunciadoIndex = texto.IndexOf("ENUNCIADO:");
+
+            if (enunciadoIndex != -1)
+            {
+                return texto.Substring(enunciadoIndex);
+            }
+            else
+            {
+                return texto;
             }
         }
     }
