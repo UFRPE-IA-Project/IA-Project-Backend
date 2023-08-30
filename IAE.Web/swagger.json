@@ -1258,17 +1258,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Turma"
+                "$ref": "#/components/schemas/TurmaDTO"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/Turma"
+                "$ref": "#/components/schemas/TurmaDTO"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/Turma"
+                "$ref": "#/components/schemas/TurmaDTO"
               }
             }
           }
@@ -1916,6 +1916,24 @@
           },
           "planoEnsino": {
             "$ref": "#/components/schemas/PlanoEnsino"
+          }
+        },
+        "additionalProperties": false
+      },
+      "TurmaDTO": {
+        "type": "object",
+        "properties": {
+          "codigoTurma": {
+            "type": "string",
+            "nullable": true
+          },
+          "professorId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "planoEnsinoId": {
+            "type": "integer",
+            "format": "int32"
           }
         },
         "additionalProperties": false

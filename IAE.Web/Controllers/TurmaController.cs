@@ -1,4 +1,5 @@
-﻿using IAE.Entities.Entities;
+﻿using IAE.Entities.DTO;
+using IAE.Entities.Entities;
 using IAE.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -37,12 +38,13 @@ namespace IAE.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult<Turma> AdicionarTurma(Turma turma)
+        public ActionResult<Turma> AdicionarTurma(TurmaDTO turmaDTO)
         {
 			if (!ModelState.IsValid)
 			{
 				return BadRequest();
 			}
+            var turma = _turmaService.CriarNovaTurmaPeloDto(turmaDTO);
 
 			_turmaService.AdicionarTurma(turma);
             return Ok("Turma adicionada com sucesso.");

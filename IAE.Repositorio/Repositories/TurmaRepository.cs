@@ -28,7 +28,7 @@ namespace IAE.Repository.Repositories
             using (IDbConnection connection = new SQLiteConnection(_connectionString))
             {
                 connection.Open();
-                string query = "INSERT INTO Turma (CodigoTurma, ProfessorId, PlanoEnsinoId) VALUES (@CodigoTurma, @IdProfessor, @IdPlanoEnsino);";
+                string query = "INSERT INTO Turma (CodigoTurma, IdProfessor, IdPlanoEnsino) VALUES (@CodigoTurma, @IdProfessor, @IdPlanoEnsino);";
                 connection.Execute(query, item);
                 return item;
             }
@@ -39,7 +39,7 @@ namespace IAE.Repository.Repositories
             using (IDbConnection connection = new SQLiteConnection(_connectionString))
             {
                 connection.Open();
-                string query = "INSERT INTO Turma (CodigoTurma, ProfessorId, PlanoEnsinoId) VALUES (@CodigoTurma, @IdProfessor, @IdPlanoEnsino);";
+                string query = "INSERT INTO Turma (CodigoTurma, IdProfessor, IdPlanoEnsino) VALUES (@CodigoTurma, @IdProfessor, @IdPlanoEnsino);";
                 return connection.Execute(query, items);
             }
         }
