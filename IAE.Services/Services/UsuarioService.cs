@@ -1,7 +1,5 @@
 ﻿using IAE.Entities.Entities;
 using IAE.Entities.DTO;
-using IAE.Entities.Entities;
-using IAE.Entities.Enumarations;
 using IAE.Repository.Interfaces;
 using IAE.Services.Interfaces;
 using System;

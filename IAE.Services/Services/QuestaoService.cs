@@ -1,6 +1,9 @@
 ﻿using IAE.Entities.Entities;
 using IAE.Repository.Interfaces;
 using IAE.Services.Interfaces;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace IAE.Services.Services
 {
@@ -35,9 +38,41 @@ namespace IAE.Services.Services
 			ArgumentNullException.ThrowIfNull(questaoDb);
 
             return questaoDb;
-		}
+        }
 
-		public Questao AtualizarQuestao(int id, Questao questao)
+        public void AdicionarMultiplasQuestoes(Questao questoes)
+        {
+            if (string.IsNullOrWhiteSpace(questoes.Enunciado))
+            {
+                throw new ArgumentNullException("Questão parece estar vazia ou nula");
+            }
+
+            var questoesString = questoes.Enunciado.Split("ENUNCIADO:", StringSplitOptions.RemoveEmptyEntries)
+                             .Select(question => $"ENUNCIADO:{question.Trim()}")
+                             .ToList();
+
+            var listaQuestoes = new List<Questao>();
+
+            if (questoesString is null || !(questoesString.Count > 0))
+            {
+                throw new ArgumentNullException("As questões enviadas são nulas ou não estão estruturadas corretamente");
+            }
+
+            foreach (var questaoString in questoesString)
+            {
+                var questao = new Questao();
+                questao.Enunciado = questaoString;
+                questao.AlternativaCorreta = 1;
+
+                ManipularStringRecebidaSeparandoPropriedades(questao.Enunciado, questao);
+
+                listaQuestoes.Add(questao);
+            }
+
+            var questoesDb = _questaoRepository.Insert(listaQuestoes);
+        }
+
+        public Questao AtualizarQuestao(int id, Questao questao)
         {
 
             var questaoDb = ObterQuestao(id);
@@ -120,7 +155,9 @@ namespace IAE.Services.Services
 
         private void ManipularStringRecebidaSeparandoPropriedades(string stringRecebida, Questao questao)
         {
-            string[] linhas = stringRecebida.Split('\n');
+            stringRecebida = RemoverTextoInicial(stringRecebida);
+            
+            string[] linhas = stringRecebida.Split('\n', StringSplitOptions.RemoveEmptyEntries);
             questao.AlternativaCorreta = 1;
 
             for (int i = 0; i < linhas.Length; i++)
@@ -158,6 +195,20 @@ namespace IAE.Services.Services
                 {
                     throw new ArgumentException("O texto recebido não parece estar estruturado de maneira esperada.");
                 }
+            }
+        }
+
+        private string RemoverTextoInicial(string texto)
+        {
+            int enunciadoIndex = texto.IndexOf("ENUNCIADO:");
+
+            if (enunciadoIndex != -1)
+            {
+                return texto.Substring(enunciadoIndex);
+            }
+            else
+            {
+                return texto;
             }
         }
     }
