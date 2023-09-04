@@ -8,13 +8,22 @@ namespace IAE.UnitTests
 {
     public class QuestaoTest
     {
-        private Questao _questao = new Questao()
+        private Questao _questaoBruta = new Questao()
         {
             Enunciado = "ENUNCIADO: Your question goes here\n" +
                            "RESPOSTA 1: Answer 1\n" +
                            "RESPOSTA 2: Answer 2\n" +
                            "RESPOSTA 3: Answer 3\n" +
                            "RESPOSTA 4: Answer 4"
+        };
+
+        private Questao _questaoEstruturada = new Questao()
+        {
+            Enunciado = "Your question goes here",
+            Alt1 = "Answer 1",
+            Alt2 = "Answer 2",
+            Alt3 = "Answer 3",
+            Alt4 = "Answer 4"
         };
 
         [Fact]
@@ -24,7 +33,7 @@ namespace IAE.UnitTests
             QuestaoService service;
             InstanciarRepositorioEService(out repository, out service);
 
-            var questao = new Questao() { Enunciado = _questao.Enunciado };
+            var questao = _questaoEstruturada;
             var questaoEsperada = new Questao()
             {
                 Enunciado = "Your question goes here",
@@ -45,8 +54,6 @@ namespace IAE.UnitTests
             Assert.Equal("Answer 3", questao.Alt3);
             Assert.Equal("Answer 4", questao.Alt4);
         }
-
-
 
 
         [Fact]
