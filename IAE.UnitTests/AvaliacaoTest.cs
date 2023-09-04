@@ -108,6 +108,9 @@ namespace IAE.UnitTests
             mockQuestaoService.Setup(service => service.ObterQuestaoPorPlanoEnsino(turma.IdPlanoEnsino))
                              .Returns(questoes);
 
+            mockQuestaoService.Setup(service => service.ObterQuestoesAleatoriasPorQuantidade(It.IsAny<int>(), It.IsAny<List<Questao>>()))
+                             .Returns(questoes);
+
             mockAvaliacaoRepository.Setup(repo => repo.Insert(It.IsAny<Avaliacao>()))
                                   .Callback<Avaliacao>(avaliacao => avaliacao.Id = 7);
 

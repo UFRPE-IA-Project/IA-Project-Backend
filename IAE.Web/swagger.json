@@ -951,17 +951,26 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Questao"
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Questao"
+                }
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/Questao"
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Questao"
+                }
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/Questao"
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Questao"
+                }
               }
             }
           }
@@ -993,7 +1002,7 @@
         }
       }
     },
-    "/api/Questao/{id}/verificar-alternativa": {
+    "/api/Questao/{id}/VerificarAlternativa": {
       "post": {
         "tags": [
           "Questao"
@@ -1092,6 +1101,63 @@
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Questao"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Questao/EstruturarQuestao": {
+      "post": {
+        "tags": [
+          "Questao"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Questao"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Questao"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Questao"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Questao"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Questao"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Questao"
+                  }
                 }
               }
             }

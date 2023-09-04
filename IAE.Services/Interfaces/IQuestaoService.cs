@@ -11,11 +11,13 @@ namespace IAE.Services.Interfaces
     {
         Questao ObterQuestao(int id);
         Questao AdicionarQuestao(Questao questao);
-        void AdicionarMultiplasQuestoes(Questao questoes);
+        List<Questao> AdicionarMultiplasQuestoes(List<Questao> questoes);
         void ApagarQuestao(int id);
         Questao AtualizarQuestao(int id, Questao questao);
-		List<Questao> ObterQuestoesPorQuantidade(int numeroQuestoes);
+		List<Questao> ObterQuestoesAleatoriasPorQuantidade(int numeroQuestoes, List<Questao> questoes);
         bool VerificarAlternativaCorreta(int questaoId, int alternativaEscolhida);
         List<Questao> ObterQuestaoPorPlanoEnsino(int idPlanoEnsino);
+        List<Questao> EstruturarQuestoes(Questao questoes);
+        List<Questao> BuscarQuestoesPorAvaliacao(int idAvaliacao);
     }
 }
