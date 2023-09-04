@@ -31,6 +31,11 @@ namespace IAE.Services.Services
             var avaliacao = _avaliacaoRepository.FindById(id);
             ArgumentNullException.ThrowIfNull(avaliacao);
 
+            var questoes = _questaoService.BuscarQuestoesPorAvaliacao(avaliacao.Id!.Value);
+
+            avaliacao.Questoes = questoes;
+            avaliacao.IdsQuestoes = questoes.Select(q =>q.Id!.Value).ToList();
+
             return avaliacao;
         }
 
@@ -65,14 +70,21 @@ namespace IAE.Services.Services
         {
 
             Turma turma = _turmaService.BuscarTurmaPorId(turmaId);
-            IList<Questao> questoes = _questaoService.ObterQuestaoPorPlanoEnsino(turma.IdPlanoEnsino);
-            List<int> idsQuestoes = questoes.Select(q => q.Id!.Value).ToList();
+            var questoes = _questaoService.ObterQuestaoPorPlanoEnsino(turma.IdPlanoEnsino);
 
-            Avaliacao avaliacao = new Avaliacao();
-            avaliacao.TipoAvaliacao = tipoAvaliacao;
-            avaliacao.AlunosParticipantes = turma.Alunos;
-            avaliacao.IdProfessor = turma.IdProfessor;
-            avaliacao.IdsQuestoes = idsQuestoes;
+            var questoesSelecionadas = ObterQuestoesAleatorias(numeroQuestoes, questoes);
+
+            var idsQuestoes = questoesSelecionadas.Select(q => q.Id!.Value).ToList();
+
+            var avaliacao = new Avaliacao
+            {
+                TipoAvaliacao = tipoAvaliacao,
+                AlunosParticipantes = turma.Alunos,
+                IdProfessor = turma.IdProfessor,
+                IdsQuestoes = idsQuestoes,
+                IdTurma = turmaId,
+                Questoes = questoesSelecionadas
+            };
 
             _avaliacaoRepository.Insert(avaliacao);
 
@@ -95,10 +107,10 @@ namespace IAE.Services.Services
 			return avaliacoes;
 		}
 
-		private List<Questao> ObterQuestoes(int numeroQuestoes)
+		private List<Questao> ObterQuestoesAleatorias(int numeroQuestoes, List<Questao> questoesPlano)
 		{
             //TODO: implementar filtro de questões por disciplina/turma/tema
-			var questoes = _questaoService.ObterQuestoesPorQuantidade(numeroQuestoes);
+			var questoes = _questaoService.ObterQuestoesAleatoriasPorQuantidade(numeroQuestoes, questoesPlano);
             return questoes;
 		}
 	}

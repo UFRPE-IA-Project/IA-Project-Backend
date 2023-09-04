@@ -11,6 +11,7 @@ namespace IAE.Repository.Interfaces
 	public interface IQuestaoRepository : IBaseRepository<Questao>
 	{
         int Insert(IList<Questao> questoes);
+        List<Questao> BuscarQuestoesPorAvaliacao(int idAvaliacao);
 
     }
 }

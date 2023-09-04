@@ -4,6 +4,8 @@ using Microsoft.Extensions.Configuration;
 using System.Data.SQLite;
 using System.Data;
 using Dapper;
+using System.Transactions;
+using System;
 
 namespace IAE.Repository.Repositories
 {
@@ -28,9 +30,27 @@ namespace IAE.Repository.Repositories
             using (IDbConnection connection = new SQLiteConnection(_connectionString))
             {
                 connection.Open();
-                string query = "INSERT INTO Turma (CodigoTurma, IdProfessor, IdPlanoEnsino) VALUES (@CodigoTurma, @IdProfessor, @IdPlanoEnsino);";
-                connection.Execute(query, item);
-                return item;
+                using (var transaction = connection.BeginTransaction())
+                {
+                    try
+                    {
+                        string query = "INSERT INTO Turma (CodigoTurma, IdProfessor, IdPlanoEnsino) VALUES (@CodigoTurma, @IdProfessor, @IdPlanoEnsino); " +
+                                        "SELECT last_insert_rowid();";
+
+                        var id = connection.ExecuteScalar<int>(query, item, transaction);
+
+                        transaction.Commit();
+
+                        var turma = FindById(id);
+
+                        return turma;
+                    }
+                    catch (Exception ex)
+                    {
+                        transaction.Rollback();
+                        throw new ArgumentException($"Houve algum problema ao inserir a turma. Erro: {ex.Message}");
+                    }
+                }
             }
         }
 

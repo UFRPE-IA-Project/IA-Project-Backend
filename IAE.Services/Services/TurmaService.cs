@@ -51,10 +51,8 @@ namespace IAE.Services.Services
         {
             var novaTurma = new Turma()
             {
-                CodigoTurma = dto.CodigoTurma,
                 IdPlanoEnsino = dto.PlanoEnsinoId,
                 IdProfessor = dto.ProfessorId
-
             };
 
             return novaTurma;

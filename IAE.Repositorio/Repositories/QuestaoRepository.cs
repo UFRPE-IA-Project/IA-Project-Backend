@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Dapper;
 using System.Data.SQLite;
 using System.Data;
+using System.Data.Common;
 
 namespace IAE.Repository.Repositories
 {
@@ -71,6 +72,30 @@ namespace IAE.Repository.Repositories
                 connection.Execute(updateQuery, item);
 
                 return item;
+            }
+        }
+
+        public List<Questao> BuscarQuestoesPorAvaliacao(int idAvaliacao)
+        {
+            using (IDbConnection connection = CreateConnection())
+            {
+                try
+                {
+                    string query = @"
+                                        SELECT Questao.*
+                                        FROM Avaliacao
+                                        INNER JOIN Turma ON Avaliacao.IdTurma = Turma.Id
+                                        INNER JOIN Questao ON Turma.IdPlanoEnsino = Questao.id_PlanoEnsino
+                                        WHERE Avaliacao.Id = @IdAvaliacao;
+                                    "
+                    ;
+
+                    return connection.Query<Questao>(query, new { IdAvaliacao = idAvaliacao }).ToList();
+                }
+                catch (Exception ex)
+                {
+                    throw new ArgumentException($"Houve algum problema ao buscar as questões da avaliacao. Erro: {ex.Message}");
+                }
             }
         }
 

@@ -49,16 +49,16 @@ namespace IAE.Web.Controllers
         [SwaggerOperation(Summary = "Adicionar várias questões")]
         [SwaggerResponse(200, "Questoes adicionadas.", typeof(Questao))]
         [SwaggerResponse(400, "Dado fornecido inválido")]
-        public ActionResult<Questao> AdicionarMultiplasQuestoes(Questao questoes)
+        public ActionResult<List<Questao>> AdicionarMultiplasQuestoes(List<Questao> questoes)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest();
             }
 
-            _questaoService.AdicionarMultiplasQuestoes(questoes);
+            var questoesAdicionadas = _questaoService.AdicionarMultiplasQuestoes(questoes);
 
-            return Ok("Questoes adicionadas.");
+            return Ok(questoesAdicionadas);
         }
 
         [HttpPut("{id}")]
@@ -94,7 +94,7 @@ namespace IAE.Web.Controllers
             return Ok($"Questão #{id} apagada com sucesso.");
         }
 
-        [HttpPost("{id}/verificar-alternativa")]
+        [HttpPost("{id}/VerificarAlternativa")]
         [SwaggerOperation(Summary = "Verificar se a alternativa escolhida é correta")]
         [SwaggerResponse(200, "Resposta da alternativa", typeof(bool))]
         [SwaggerResponse(400, "Dados fornecidos inválidos")]
@@ -126,5 +126,19 @@ namespace IAE.Web.Controllers
             }
         }
 
+        [HttpPost]
+        [Route("EstruturarQuestao")]
+        public ActionResult<List<Questao>> EstruturarQuestoes(Questao questoes)
+        {
+            try
+            {
+                var questoesEstruturadas = _questaoService.EstruturarQuestoes(questoes);
+                return Ok(questoesEstruturadas);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }

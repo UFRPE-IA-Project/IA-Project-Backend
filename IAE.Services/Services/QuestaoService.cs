@@ -1,4 +1,5 @@
-﻿using IAE.Entities.Entities;
+﻿using IAE.Entities.DTO;
+using IAE.Entities.Entities;
 using IAE.Repository.Interfaces;
 using IAE.Services.Interfaces;
 using System;
@@ -32,7 +33,7 @@ namespace IAE.Services.Services
                 throw new ArgumentNullException("Questão parece estar vazia ou nula");
             }
 
-            ManipularStringRecebidaSeparandoPropriedades(questao.Enunciado, questao);
+            //ManipularStringRecebidaSeparandoPropriedades(questao.Enunciado, questao);
 
             var questaoDb = _questaoRepository.Insert(questao);
 			ArgumentNullException.ThrowIfNull(questaoDb);
@@ -40,36 +41,23 @@ namespace IAE.Services.Services
             return questaoDb;
         }
 
-        public void AdicionarMultiplasQuestoes(Questao questoes)
+        public List<Questao> AdicionarMultiplasQuestoes(List<Questao> questoes)
         {
-            if (string.IsNullOrWhiteSpace(questoes.Enunciado))
+            var listaErros = new List<string>();
+
+            for(int indiceQuestao = 1; indiceQuestao >= questoes.Count; indiceQuestao++)
             {
-                throw new ArgumentNullException("Questão parece estar vazia ou nula");
+                var enunciadoExiste = string.IsNullOrEmpty(questoes[indiceQuestao-1].Enunciado);
+
+                if (!enunciadoExiste)
+                {
+                    listaErros.Add($"Questão {indiceQuestao} da lista não possui enunciado");
+                }
             }
 
-            var questoesString = questoes.Enunciado.Split("ENUNCIADO:", StringSplitOptions.RemoveEmptyEntries)
-                             .Select(question => $"ENUNCIADO:{question.Trim()}")
-                             .ToList();
+            _questaoRepository.Insert(questoes);
 
-            var listaQuestoes = new List<Questao>();
-
-            if (questoesString is null || !(questoesString.Count > 0))
-            {
-                throw new ArgumentNullException("As questões enviadas são nulas ou não estão estruturadas corretamente");
-            }
-
-            foreach (var questaoString in questoesString)
-            {
-                var questao = new Questao();
-                questao.Enunciado = questaoString;
-                questao.AlternativaCorreta = 1;
-
-                ManipularStringRecebidaSeparandoPropriedades(questao.Enunciado, questao);
-
-                listaQuestoes.Add(questao);
-            }
-
-            var questoesDb = _questaoRepository.Insert(listaQuestoes);
+            return questoes;
         }
 
         public Questao AtualizarQuestao(int id, Questao questao)
@@ -104,18 +92,17 @@ namespace IAE.Services.Services
             return questoes;
         }
 
-		public List<Questao> ObterQuestoesPorQuantidade(int numeroQuestoes)
+		public List<Questao> ObterQuestoesAleatoriasPorQuantidade(int numeroQuestoes, List<Questao> questoes)
 		{
-            var todasQuestoes = ObterQuestoes();
-			numeroQuestoes = Math.Min(numeroQuestoes, todasQuestoes.Count);
+			numeroQuestoes = Math.Min(numeroQuestoes, questoes.Count);
 
-			var questoesRemanecentes = new List<Questao>(todasQuestoes);
+			var questoesRemanecentes = new List<Questao>(questoes);
             var questoesEscolhidas = new List<Questao>();
 
 			for (int i = 0; i < numeroQuestoes; i++)
             {
-                var indiceQuestao = _random.Next(todasQuestoes.Count);
-				var questaoSelecionada = todasQuestoes[indiceQuestao];
+                var indiceQuestao = _random.Next(questoesRemanecentes.Count);
+				var questaoSelecionada = questoesRemanecentes[indiceQuestao];
 
                 questoesEscolhidas.Add(questaoSelecionada);
 				questoesRemanecentes.RemoveAt(indiceQuestao);
@@ -138,19 +125,98 @@ namespace IAE.Services.Services
 
         public List<Questao> ObterQuestaoPorPlanoEnsino(int idPlanoEnsino)
         {
-            var questoes = _questaoRepository.FindAll();
-            var questoesDoPlano = new List<Questao>();
+            var questoes = _questaoRepository.FindAll()
+                .Where(q => q.id_PlanoEnsino == idPlanoEnsino)
+                .ToList();
 
-            foreach (var questao in questoes)
+            return questoes;
+        }
+
+        public List<Questao> EstruturarQuestoes(Questao questoes)
+        {
+            if (string.IsNullOrWhiteSpace(questoes.Enunciado))
             {
-                if (questao.id_PlanoEnsino == idPlanoEnsino)
-                {
-                    questoesDoPlano.Add(questao);
-                }
+                throw new ArgumentNullException("Questão parece estar vazia ou nula");
             }
 
-            return questoesDoPlano;
+            var questoesString = questoes.Enunciado.Split("ENUNCIADO:", StringSplitOptions.RemoveEmptyEntries)
+                             .Select(question => $"ENUNCIADO:{question.Trim()}")
+                             .ToList();
 
+            var listaQuestoes = new List<Questao>();
+
+            if (questoesString is null || !(questoesString.Count > 0))
+            {
+                throw new ArgumentNullException("As questões enviadas são nulas ou não estão estruturadas corretamente");
+            }
+
+            foreach (var questaoString in questoesString)
+            {
+                var questao = new Questao();
+                questao.Enunciado = questaoString;
+                questao.AlternativaCorreta = 1;
+
+                ManipularStringRecebidaSeparandoPropriedades(questao.Enunciado, questao);
+
+                RandomizarResposta(questao);
+
+                listaQuestoes.Add(questao);
+            }
+
+            return listaQuestoes;
+        }
+
+        private void RandomizarResposta(Questao questao)
+        {
+            var listaRespostas = CriarListaRespostas(questao);
+            RandomizarRespostas(listaRespostas);
+            AtualizarQuestaoComRespostas(questao, listaRespostas);
+        }
+
+        private List<RespostaDTO> CriarListaRespostas(Questao questao)
+        {
+            var listaRespostas = new List<RespostaDTO>
+            {
+                new RespostaDTO(questao.Alt1, false),
+                new RespostaDTO(questao.Alt2, false),
+                new RespostaDTO(questao.Alt3, false),
+                new RespostaDTO(questao.Alt4, false)
+            };
+
+            listaRespostas[questao.AlternativaCorreta - 1].IsCorreta = true;
+
+            return listaRespostas;
+        }
+
+        private void RandomizarRespostas(List<RespostaDTO> listaRespostas)
+        {
+            int n = listaRespostas.Count;
+            while (n > 1)
+            {
+                n--;
+                int k = _random.Next(n + 1);
+                var valor = listaRespostas[k];
+                listaRespostas[k] = listaRespostas[n];
+                listaRespostas[n] = valor;
+            }
+        }
+
+        private void AtualizarQuestaoComRespostas(Questao questao, List<RespostaDTO> listaRespostas)
+        {
+            questao.Alt1 = listaRespostas[0].Resposta;
+            questao.Alt2 = listaRespostas[1].Resposta;
+            questao.Alt3 = listaRespostas[2].Resposta;
+            questao.Alt4 = listaRespostas[3].Resposta;
+
+            // Encontra a alternativa correta
+            questao.AlternativaCorreta = listaRespostas.FindIndex(r => r.IsCorreta) + 1;
+        }
+
+        public List<Questao> BuscarQuestoesPorAvaliacao(int idAvaliacao)
+        {
+            var questoes = _questaoRepository.BuscarQuestoesPorAvaliacao(idAvaliacao);
+
+            return questoes;
         }
 
         private void ManipularStringRecebidaSeparandoPropriedades(string stringRecebida, Questao questao)
